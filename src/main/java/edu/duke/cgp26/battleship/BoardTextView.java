@@ -12,12 +12,12 @@ package edu.duke.cgp26.battleship;
  */
 public class BoardTextView {
     /**
-     * The Board to display
+     * The {@link Board} to display.
      */
     private final Board toDisplay;
 
     /**
-     * Constructs a BoardView, given the board it will display.
+     * Constructs a BoardView, given the Board it will display.
      *
      * @param toDisplay is the Board to display.
      * @throws IllegalArgumentException if the board is larger than 10x26.
@@ -31,9 +31,9 @@ public class BoardTextView {
     }
 
     /**
-     * This makes the header line, e.g. 0|1|2|3|4\n
+     * This makes the header line, e.g. 0|1|2|3|4\n.
      *
-     * @return the String that is the header line for the given board
+     * @return the String that is the header line for the given board.
      */
     String makeHeader() {
         StringBuilder ans = new StringBuilder("  ");
@@ -59,9 +59,7 @@ public class BoardTextView {
             String rowLetter = String.valueOf((char) ('A' + i));
             ans.append(rowLetter);
             ans.append("  ");
-            for (int j = 1; j < toDisplay.getWidth(); j++) {
-                ans.append("| ");
-            }
+            ans.append("| ".repeat(toDisplay.getWidth() - 1));
             ans.append(" ");
             ans.append(rowLetter);
             ans.append("\n");
