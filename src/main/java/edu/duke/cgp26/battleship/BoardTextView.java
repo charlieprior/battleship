@@ -56,7 +56,7 @@ public class BoardTextView {
         StringBuilder ans = new StringBuilder(makeHeader());
         for (int i = 0; i < toDisplay.getHeight(); i++) {
             // Since we enforce the height is < 27, this should be fine
-            String rowLetter = i >= 0 && i < 26 ? String.valueOf((char) ('A' + i)) : "";
+            String rowLetter = String.valueOf((char) ('A' + i));
             ans.append(rowLetter);
             ans.append("  ");
             for (int j = 1; j < toDisplay.getWidth(); j++) {
