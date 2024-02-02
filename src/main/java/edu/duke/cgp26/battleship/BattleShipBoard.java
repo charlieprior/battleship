@@ -1,18 +1,24 @@
 package edu.duke.cgp26.battleship;
 
 /**
- * A representation of the board in our game of Battleship
+ * A representation of the board in our game of Battleship.
  * @author Charlie Prior
  */
 public class BattleShipBoard implements Board {
+    /**
+     * The width.
+     */
     private final int width;
+    /**
+     * The height.
+     */
     private final int height;
 
     /**
-     * Constructs a BattleShipBoard with the specified width and height
-     * @param width the width of the newly constructed board
-     * @param height the height of the newly constructed board
-     * @throws IllegalArgumentException if the width or height are less than zero
+     * Constructs a BattleShipBoard with the specified width and height.
+     * @param width the width of the newly constructed board.
+     * @param height the height of the newly constructed board.
+     * @throws IllegalArgumentException if the width or height are less than zero.
      */
     public BattleShipBoard(int width, int height) {
         if(width <= 0) {
@@ -26,16 +32,16 @@ public class BattleShipBoard implements Board {
     }
 
     /**
-     * Get the width of the BattleShipBoard
-     * @return the width of the BattleShipBoard
+     * Get the width of the BattleShipBoard.
+     * @return the width of the BattleShipBoard.
      */
     public int getWidth() {
         return width;
     }
 
     /**
-     * Get the height of the BattleShipBoard
-     * @return the height of the BattleShipBoard
+     * Get the height of the BattleShipBoard.
+     * @return the height of the BattleShipBoard.
      */
     public int getHeight() {
         return height;
