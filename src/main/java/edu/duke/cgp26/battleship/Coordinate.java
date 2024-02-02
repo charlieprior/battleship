@@ -37,7 +37,7 @@ public class Coordinate {
         if (text.length() != 2) {
             throw new IllegalArgumentException("The coordinate must consist of one letter and one number\n");
         }
-
+        text = text.toUpperCase();
         char rowLetter = text.charAt(0);
         char colLetter = text.charAt(1);
 

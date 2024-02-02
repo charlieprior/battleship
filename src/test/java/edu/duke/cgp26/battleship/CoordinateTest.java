@@ -61,7 +61,9 @@ class CoordinateTest {
         Coordinate c4 = new Coordinate("Z0");
         assertEquals(25, c4.getRow());
         assertEquals(0, c4.getColumn());
-
+        Coordinate c5 = new Coordinate("e7");
+        assertEquals(4, c5.getRow());
+        assertEquals(7, c5.getColumn());
     }
 
     @Test
