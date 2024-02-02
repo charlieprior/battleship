@@ -73,6 +73,9 @@ class PlacementTest {
         assertEquals(p1, p2);
         assertNotEquals(p3, p4);
         assertEquals(p5, p6);
+        assertEquals(p1, p1);
+        assertNotEquals(p1, null);
+        assertNotEquals(p1, c1);
     }
 
     @Test
