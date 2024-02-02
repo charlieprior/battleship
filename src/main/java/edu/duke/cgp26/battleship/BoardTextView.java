@@ -54,12 +54,20 @@ public class BoardTextView {
      */
     public String displayMyOwnBoard() {
         StringBuilder ans = new StringBuilder(makeHeader());
-        for (int i = 0; i < toDisplay.getHeight(); i++) {
+        for (int row = 0; row < toDisplay.getHeight(); row++) {
             // Since we enforce the height is < 27, this should be fine
-            String rowLetter = String.valueOf((char) ('A' + i));
+            String rowLetter = String.valueOf((char) ('A' + row));
             ans.append(rowLetter);
-            ans.append("  ");
-            ans.append("| ".repeat(toDisplay.getWidth() - 1));
+            String sep = " ";
+            for (int col = 0; col < toDisplay.getWidth(); col++) {
+                ans.append(sep);
+                Character disp = toDisplay.whatIsAt(new Coordinate(row, col));
+                if (disp == null) {
+                    disp = ' ';
+                }
+                ans.append(disp);
+                sep = "|";
+            }
             ans.append(" ");
             ans.append(rowLetter);
             ans.append("\n");

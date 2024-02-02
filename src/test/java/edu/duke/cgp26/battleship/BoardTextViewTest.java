@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BoardTextViewTest {
     private void emptyBoardHelper(int w, int h, String expectedHeader, String expectedBody) {
-        Board<Character> b1 = new BattleShipBoard<Character>(w, h);
+        Board<Character> b1 = new BattleShipBoard<>(w, h);
         BoardTextView view = new BoardTextView(b1);
         assertEquals(expectedHeader, view.makeHeader());
         String expected = expectedHeader + expectedBody + expectedHeader;
@@ -39,6 +39,39 @@ public class BoardTextViewTest {
                               "D  | |  D\n" +
                               "E  | |  E\n";
         emptyBoardHelper(3, 5, expectedHeader, expectedBody);
+    }
+
+    @Test
+    public void test_display_filled_3by5() {
+        Board<Character> b1 = new BattleShipBoard<>(3, 5);
+        BoardTextView view = new BoardTextView(b1);
+        b1.tryAddShip(new BasicShip(new Coordinate(1, 2)));
+        String expected = "  0|1|2\n" +
+                          "A  | |  A\n" +
+                          "B  | |s B\n" +
+                          "C  | |  C\n" +
+                          "D  | |  D\n" +
+                          "E  | |  E\n" +
+                          "  0|1|2\n";
+        assertEquals(expected, view.displayMyOwnBoard());
+        b1.tryAddShip(new BasicShip(new Coordinate(0, 0)));
+        expected = "  0|1|2\n" +
+                   "A s| |  A\n" +
+                   "B  | |s B\n" +
+                   "C  | |  C\n" +
+                   "D  | |  D\n" +
+                   "E  | |  E\n" +
+                   "  0|1|2\n";
+        assertEquals(expected, view.displayMyOwnBoard());
+        b1.tryAddShip(new BasicShip(new Coordinate(4, 1)));
+        expected = "  0|1|2\n" +
+                   "A s| |  A\n" +
+                   "B  | |s B\n" +
+                   "C  | |  C\n" +
+                   "D  | |  D\n" +
+                   "E  |s|  E\n" +
+                   "  0|1|2\n";
+        assertEquals(expected, view.displayMyOwnBoard());
     }
 
     @Test
