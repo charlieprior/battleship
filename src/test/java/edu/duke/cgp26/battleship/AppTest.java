@@ -43,13 +43,13 @@ class AppTest {
 
         app.doOnePlacement();
         assertEquals("Where would you like to put your ship?\n" +
-                     "  0|1|2\n" +
-                     "A  | |  A\n" +
-                     "B  | |s B\n" +
-                     "C  | |  C\n" +
-                     "D  | |  D\n" +
-                     "E  | |  E\n" +
-                     "  0|1|2\n", bytes.toString());
+                "  0|1|2\n" +
+                "A  | |  A\n" +
+                "B  | |d B\n" +
+                "C  | |d C\n" +
+                "D  | |d D\n" +
+                "E  | |  E\n" +
+                "  0|1|2\n", bytes.toString());
         bytes.reset();
     }
 

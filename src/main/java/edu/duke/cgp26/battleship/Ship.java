@@ -52,4 +52,11 @@ public interface Ship<T> {
      * @throws IllegalArgumentException if where is not part of the Ship
      */
     T getDisplayInfoAt(Coordinate where);
+
+    /**
+     * Get the name of this Ship, such as "submarine".
+     *
+     * @return the name of this ship
+     */
+    String getName();
 }

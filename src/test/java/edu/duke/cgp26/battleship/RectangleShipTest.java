@@ -14,10 +14,11 @@ class RectangleShipTest {
     }
 
     private void test_constructor_helper(Coordinate c1, int width, int height, HashSet<Coordinate> expected) {
-        RectangleShip<Character> rs = new RectangleShip<>(c1, width, height, 's', '*');
+        RectangleShip<Character> rs = new RectangleShip<>("submarine", c1, width, height, 's', '*');
         for (Coordinate c : expected) {
             assertTrue(rs.occupiesCoordinates(c));
         }
+        assertEquals("submarine", rs.getName());
     }
 
     @Test
@@ -58,7 +59,7 @@ class RectangleShipTest {
 
     @Test
     public void test_recordWasHit() {
-        RectangleShip<Character> rs = new RectangleShip<>(new Coordinate(1, 2), 1, 3, 's', '*');
+        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Coordinate(1, 2), 1, 3, 's', '*');
         rs.recordHitAt(new Coordinate(1, 2));
         assertTrue(rs.wasHitAt(new Coordinate(1, 2)));
 
@@ -71,7 +72,7 @@ class RectangleShipTest {
 
     @Test
     public void test_isSunk() {
-        RectangleShip<Character> rs = new RectangleShip<>(new Coordinate(1, 2), 1, 3, 's', '*');
+        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Coordinate(1, 2), 1, 3, 's', '*');
         assertFalse(rs.isSunk());
         rs.recordHitAt(new Coordinate(1, 2));
         assertFalse(rs.isSunk());
@@ -83,7 +84,7 @@ class RectangleShipTest {
 
     @Test
     public void test_getDisplayInfo() {
-        RectangleShip<Character> rs = new RectangleShip<>(new Coordinate(1, 2), 1, 3, 's', '*');
+        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Coordinate(1, 2), 1, 3, 's', '*');
         assertEquals('s', rs.getDisplayInfoAt(new Coordinate(1, 2)));
         rs.recordHitAt(new Coordinate(1, 2));
         assertEquals('*', rs.getDisplayInfoAt(new Coordinate(1, 2)));

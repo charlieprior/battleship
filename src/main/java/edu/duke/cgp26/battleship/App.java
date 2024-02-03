@@ -7,6 +7,10 @@ import java.io.*;
  */
 public class App {
     /**
+     * The factory for creating ships.
+     */
+    final AbstractShipFactory<Character> shipFactory;
+    /**
      * The game board.
      */
     final Board<Character> theBoard;
@@ -31,6 +35,7 @@ public class App {
      * @param out         the output stream.
      */
     public App(Board<Character> theBoard, Reader inputSource, PrintStream out) {
+        this.shipFactory = new V1ShipFactory();
         this.theBoard = theBoard;
         this.view = new BoardTextView(theBoard);
         this.inputReader = new BufferedReader(inputSource);
@@ -69,7 +74,7 @@ public class App {
      */
     public void doOnePlacement() throws IOException {
         Placement p = readPlacement("Where would you like to put your ship?");
-        RectangleShip<Character> s = new RectangleShip<>(p.getWhere(), 's', '*');
+        Ship<Character> s = shipFactory.makeDestroyer(p);
         theBoard.tryAddShip(s);
         out.print(view.displayMyOwnBoard());
     }
