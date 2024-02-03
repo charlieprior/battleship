@@ -59,4 +59,11 @@ public interface Ship<T> {
      * @return the name of this ship
      */
     String getName();
+
+    /**
+     * Get all the Coordinates that this Ship occupies.
+     *
+     * @return An Iterable with the coordinates that this Ship occupies
+     */
+    Iterable<Coordinate> getCoordinates();
 }

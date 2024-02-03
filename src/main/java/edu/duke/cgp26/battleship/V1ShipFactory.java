@@ -1,5 +1,8 @@
 package edu.duke.cgp26.battleship;
 
+/**
+ * This class represents a factory for creating ships in Version 1 of the battleship game.
+ */
 public class V1ShipFactory implements AbstractShipFactory<Character> {
     /**
      * Create a ship of the given type with its upper-left at the indicated position.

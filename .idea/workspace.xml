@@ -8,12 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/AbstractShipFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/V1ShipFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/V1ShipFactoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/InBoundsRuleChecker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/PlacementRuleChecker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/InBoundsRuleCheckerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/RectangleShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/RectangleShip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BasicShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BasicShip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleShipBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleShipBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/RectangleShipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/RectangleShipTest.java" afterDir="false" />
     </list>
@@ -86,6 +86,7 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Gradle.Build battleship.executor": "Run",
+    "Gradle.InBoundsRuleCheckerTest.test_rule.executor": "Debug",
     "Gradle.MainTest.test_main.executor": "Run",
     "Gradle.battleship [:App.main()].executor": "Run",
     "Gradle.battleship [installDist].executor": "Run",
@@ -135,6 +136,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="InBoundsRuleCheckerTest.test_rule" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;edu.duke.cgp26.battleship.InBoundsRuleCheckerTest.test_rule&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="All Tests" type="JUnit" factoryName="JUnit">
       <extension name="coverage">
         <pattern>
@@ -157,10 +182,12 @@
     </configuration>
     <list>
       <item itemvalue="Application.App" />
+      <item itemvalue="Gradle.InBoundsRuleCheckerTest.test_rule" />
       <item itemvalue="JUnit.All Tests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.InBoundsRuleCheckerTest.test_rule" />
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
@@ -184,7 +211,7 @@
       <workItem from="1706821068995" duration="10655000" />
       <workItem from="1706893112689" duration="1056000" />
       <workItem from="1706894174606" duration="6921000" />
-      <workItem from="1706978972756" duration="7653000" />
+      <workItem from="1706978972756" duration="10955000" />
     </task>
     <servers />
   </component>
@@ -210,7 +237,7 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1706996912959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707000714224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
   </component>

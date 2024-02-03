@@ -90,4 +90,14 @@ class RectangleShipTest {
         assertEquals('*', rs.getDisplayInfoAt(new Coordinate(1, 2)));
         assertThrows(IllegalArgumentException.class, () -> rs.getDisplayInfoAt(new Coordinate(1, 4)));
     }
+
+    @Test
+    public void test_getCoordinates() {
+        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Coordinate(1, 2), 1, 3, 's', '*');
+        HashSet<Coordinate> coords = new HashSet<>();
+        coords.add(new Coordinate(1, 2));
+        coords.add(new Coordinate(2, 2));
+        coords.add(new Coordinate(3, 2));
+        assertIterableEquals(coords, rs.getCoordinates());
+    }
 }
