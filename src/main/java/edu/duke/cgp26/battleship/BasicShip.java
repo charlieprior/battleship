@@ -3,9 +3,9 @@ package edu.duke.cgp26.battleship;
 import java.util.HashMap;
 
 /**
- * This class represents a basic 1x1 Ship in our Battleship game. It
- * specializes the representation to Character. It is mainly a mock
- * class used for testing.
+ * A class representing a basic ship.
+ *
+ * @param <T> the representation type.
  */
 public abstract class BasicShip<T> implements Ship<T> {
     /**
@@ -33,6 +33,17 @@ public abstract class BasicShip<T> implements Ship<T> {
     }
 
     /**
+     * Check if the given coordinate is part of this ship.
+     *
+     * @param c is the coordinate to check.
+     */
+    protected void checkCoordinateInThisShip(Coordinate c) {
+        if (!myPieces.containsKey(c)) {
+            throw new IllegalArgumentException("Coordinate " + c + " is not part of the ship.\n");
+        }
+    }
+
+    /**
      * Check if this ship occupies the given coordinate.
      *
      * @param where is the Coordinate to check if this Ship occupies
@@ -51,7 +62,12 @@ public abstract class BasicShip<T> implements Ship<T> {
      */
     @Override
     public boolean isSunk() {
-        return false;
+        for (Boolean val : myPieces.values()) {
+            if (!val) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -62,6 +78,8 @@ public abstract class BasicShip<T> implements Ship<T> {
      */
     @Override
     public void recordHitAt(Coordinate where) {
+        checkCoordinateInThisShip(where);
+        myPieces.put(where, true);
     }
 
     /**
@@ -75,7 +93,8 @@ public abstract class BasicShip<T> implements Ship<T> {
      */
     @Override
     public boolean wasHitAt(Coordinate where) {
-        return false;
+        checkCoordinateInThisShip(where);
+        return myPieces.get(where);
     }
 
     /**
@@ -88,7 +107,7 @@ public abstract class BasicShip<T> implements Ship<T> {
      */
     @Override
     public T getDisplayInfoAt(Coordinate where) {
-        // TODO this is not right.  We need to look up the hit status of this coordinate
-        return myDisplayInfo.getInfo(where, false);
+        checkCoordinateInThisShip(where);
+        return myDisplayInfo.getInfo(where, myPieces.get(where));
     }
 }

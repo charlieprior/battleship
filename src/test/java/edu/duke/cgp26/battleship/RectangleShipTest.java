@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class RectangleShipTest {
 
@@ -55,5 +54,39 @@ class RectangleShipTest {
         coords2.add(new Coordinate(4, 7));
         coords2.add(new Coordinate(5, 7));
         test_constructor_helper(new Coordinate(4, 5), 3, 2, coords2);
+    }
+
+    @Test
+    public void test_recordWasHit() {
+        RectangleShip<Character> rs = new RectangleShip<>(new Coordinate(1, 2), 1, 3, 's', '*');
+        rs.recordHitAt(new Coordinate(1, 2));
+        assertTrue(rs.wasHitAt(new Coordinate(1, 2)));
+
+        rs.recordHitAt(new Coordinate(2, 2));
+        assertTrue(rs.wasHitAt(new Coordinate(2, 2)));
+
+        assertThrows(IllegalArgumentException.class, () -> rs.recordHitAt(new Coordinate(1, 3)));
+        assertThrows(IllegalArgumentException.class, () -> rs.wasHitAt(new Coordinate(1, 3)));
+    }
+
+    @Test
+    public void test_isSunk() {
+        RectangleShip<Character> rs = new RectangleShip<>(new Coordinate(1, 2), 1, 3, 's', '*');
+        assertFalse(rs.isSunk());
+        rs.recordHitAt(new Coordinate(1, 2));
+        assertFalse(rs.isSunk());
+        rs.recordHitAt(new Coordinate(2, 2));
+        assertFalse(rs.isSunk());
+        rs.recordHitAt(new Coordinate(3, 2));
+        assertTrue(rs.isSunk());
+    }
+
+    @Test
+    public void test_getDisplayInfo() {
+        RectangleShip<Character> rs = new RectangleShip<>(new Coordinate(1, 2), 1, 3, 's', '*');
+        assertEquals('s', rs.getDisplayInfoAt(new Coordinate(1, 2)));
+        rs.recordHitAt(new Coordinate(1, 2));
+        assertEquals('*', rs.getDisplayInfoAt(new Coordinate(1, 2)));
+        assertThrows(IllegalArgumentException.class, () -> rs.getDisplayInfoAt(new Coordinate(1, 4)));
     }
 }
