@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BattleShipBoardTest {
     private void addBasicShipAtCoord(Board<Character> b, Coordinate coord) {
-        Ship<Character> s = new BasicShip(coord);
+        Ship<Character> s = new RectangleShip<>(coord, 's', '*');
         assertTrue(b.tryAddShip(s));
     }
 

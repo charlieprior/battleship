@@ -1,23 +1,35 @@
 package edu.duke.cgp26.battleship;
 
+import java.util.HashMap;
+
 /**
  * This class represents a basic 1x1 Ship in our Battleship game. It
  * specializes the representation to Character. It is mainly a mock
  * class used for testing.
  */
-public class BasicShip implements Ship<Character> {
+public abstract class BasicShip<T> implements Ship<T> {
     /**
-     * The location of the Ship.
+     * The ShipDisplayInfo of the ship.
      */
-    private final Coordinate myLocation;
+    protected ShipDisplayInfo<T> myDisplayInfo;
+    /**
+     * The {@link Coordinate}s the ship occupies.
+     * True if hit, false otherwise.
+     */
+    protected HashMap<Coordinate, Boolean> myPieces;
 
     /**
-     * Construct a BasicShip given a Coordinate location.
+     * Construct a BasicShip given an Iterable of Coordinates.
      *
-     * @param myLocation where to construct the Ship.
+     * @param where         the Coordinates of the ship.
+     * @param myDisplayInfo the ShipDisplayInfo of the ship.
      */
-    public BasicShip(Coordinate myLocation) {
-        this.myLocation = myLocation;
+    public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> myDisplayInfo) {
+        this.myPieces = new HashMap<>();
+        this.myDisplayInfo = myDisplayInfo;
+        for (Coordinate c : where) {
+            myPieces.put(c, false);
+        }
     }
 
     /**
@@ -28,7 +40,7 @@ public class BasicShip implements Ship<Character> {
      */
     @Override
     public boolean occupiesCoordinates(Coordinate where) {
-        return where.equals(myLocation);
+        return myPieces.containsKey(where);
     }
 
     /**
@@ -75,7 +87,8 @@ public class BasicShip implements Ship<Character> {
      * @throws IllegalArgumentException if where is not part of the Ship
      */
     @Override
-    public Character getDisplayInfoAt(Coordinate where) {
-        return 's';
+    public T getDisplayInfoAt(Coordinate where) {
+        // TODO this is not right.  We need to look up the hit status of this coordinate
+        return myDisplayInfo.getInfo(where, false);
     }
 }
