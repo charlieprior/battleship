@@ -3,6 +3,10 @@ package edu.duke.cgp26.battleship;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.function.Function;
 
 /**
  * A class to represent a player in the game.
@@ -32,6 +36,14 @@ public class TextPlayer {
      * Where to print output.
      */
     final PrintStream out;
+    /**
+     * The ships to place.
+     */
+    final ArrayList<String> shipsToPlace;
+    /**
+     * A map of ship names to functions that create ships.
+     */
+    final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
 
     /**
      * Create a TextPlayer.
@@ -49,6 +61,11 @@ public class TextPlayer {
         this.view = new BoardTextView(theBoard);
         this.inputReader = inputSource;
         this.out = out;
+        this.shipsToPlace = new ArrayList<>();
+        this.shipCreationFns = new HashMap<>();
+
+        setupShipCreationMap();
+        setupShipCreationList();
     }
 
     /**
@@ -60,6 +77,26 @@ public class TextPlayer {
         out.println("---------------------------------------------------------------------------");
         out.print(s);
         out.println("---------------------------------------------------------------------------");
+    }
+
+    /**
+     * Set up the ship creation map.
+     */
+    protected void setupShipCreationMap() {
+        shipCreationFns.put("Submarine", shipFactory::makeSubmarine);
+        shipCreationFns.put("Destroyer", shipFactory::makeDestroyer);
+        shipCreationFns.put("Battleship", shipFactory::makeBattleship);
+        shipCreationFns.put("Carrier", shipFactory::makeCarrier);
+    }
+
+    /**
+     * Set up the ship creation list.
+     */
+    protected void setupShipCreationList() {
+        shipsToPlace.addAll(Collections.nCopies(2, "Submarine"));
+        shipsToPlace.addAll(Collections.nCopies(3, "Destroyer"));
+        shipsToPlace.addAll(Collections.nCopies(3, "Battleship"));
+        shipsToPlace.addAll(Collections.nCopies(2, "Carrier"));
     }
 
     /**
@@ -78,11 +115,13 @@ public class TextPlayer {
     /**
      * Reads a placement String from the input reader, places it, and displays the Board.
      *
+     * @param shipName the name of the ship to place.
+     * @param createFn the function to create the ship.
      * @throws IOException We will not handle this exception.
      */
-    public void doOnePlacement() throws IOException {
-        Placement p = readPlacement("Player " + name + " where do you want to place a Destroyer?\n");
-        Ship<Character> s = shipFactory.makeDestroyer(p);
+    public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn) throws IOException {
+        Placement p = readPlacement("Player " + name + " where do you want to place a " + shipName + "?\n");
+        Ship<Character> s = createFn.apply(p);
         theBoard.tryAddShip(s);
         print(view.displayMyOwnBoard());
     }
@@ -104,6 +143,8 @@ public class TextPlayer {
                 "3 \"Destroyers\" that are 1x3\n" +
                 "3 \"Battleships\" that are 1x4\n" +
                 "2 \"Carriers\" that are 1x6\n");
-        doOnePlacement();
+        for (String s : shipsToPlace) {
+            doOnePlacement(s, shipCreationFns.get(s));
+        }
     }
 }
