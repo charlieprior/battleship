@@ -57,7 +57,7 @@ public class BattleShipBoard<T> implements Board<T> {
      * @throws IllegalArgumentException if the width or height are less than zero.
      */
     public BattleShipBoard(int width, int height) {
-        this(width, height, new InBoundsRuleChecker<>(null));
+        this(width, height, new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null)));
     }
 
     /**
@@ -79,14 +79,17 @@ public class BattleShipBoard<T> implements Board<T> {
     }
 
     /**
-     * Try to add a {@link Ship} to the Board.
+     * Try to add a {@link Ship} to the Board, according to the placement checker.
      *
      * @param toAdd the Ship to add.
      * @return true if successful, false otherwise.
      */
     public boolean tryAddShip(Ship<T> toAdd) {
-        myShips.add(toAdd);
-        return true;
+        if (placementChecker.checkPlacement(toAdd, this)) {
+            myShips.add(toAdd);
+            return true;
+        }
+        return false;
     }
 
     /**

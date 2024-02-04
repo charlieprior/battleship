@@ -47,4 +47,15 @@ class BattleShipBoardTest {
         Character[][] expected3 = {{null, 's', null}, {null, null, 's'}, {null, null, null}};
         checkWhatIsAtBoard(b1, expected3);
     }
+
+    @Test
+    public void test_tryAddShip() {
+        V1ShipFactory factory = new V1ShipFactory();
+        Board<Character> b1 = new BattleShipBoard<>(6, 6);
+        Ship<Character> s1 = factory.makeSubmarine(new Placement("A0H"));
+        assertTrue(b1.tryAddShip(s1));
+
+        Ship<Character> s2 = factory.makeBattleship(new Placement("A0V"));
+        assertFalse(b1.tryAddShip(s2));
+    }
 }
