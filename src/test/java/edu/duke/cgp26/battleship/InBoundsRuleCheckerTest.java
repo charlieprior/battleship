@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class InBoundsRuleCheckerTest {
     V1ShipFactory factory = new V1ShipFactory();
-    InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(null);
+    PlacementRuleChecker<Character> checker = new InBoundsRuleChecker<>(null);
     Board<Character> board = new BattleShipBoard<>(5, 5, checker);
 
     @Test

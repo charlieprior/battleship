@@ -93,7 +93,7 @@ public class BattleShipBoard<T> implements Board<T> {
      * Represent what is at a {@link Coordinate} on the Board.
      *
      * @param where the Coordinate to look at.
-     * @return the representation of what is at that Coordinate.
+     * @return the representation of what is at that Coordinate, or null if unoccupied
      */
     public T whatIsAt(Coordinate where) {
         for (Ship<T> s : myShips) {

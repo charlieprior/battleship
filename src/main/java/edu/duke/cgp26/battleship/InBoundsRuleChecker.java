@@ -8,7 +8,7 @@ package edu.duke.cgp26.battleship;
 public class InBoundsRuleChecker<T> extends PlacementRuleChecker<T> {
 
     /**
-     * Create a new PlacementRuleChecker.
+     * Create a new InBoundsRuleChecker.
      *
      * @param next the next rule in the chain.
      */
