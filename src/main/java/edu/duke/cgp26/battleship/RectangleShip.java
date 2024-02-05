@@ -40,8 +40,8 @@ public class RectangleShip<T> extends BasicShip<T> {
      * @param onHit     the representation to display when the ship is hit.
      */
     public RectangleShip(String name, Coordinate upperLeft, int width, int height, T data, T onHit) {
-        this(name, upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit),
-                new SimpleShipDisplayInfo<T>(null, data));
+        this(name, upperLeft, width, height, new SimpleShipDisplayInfo<>(data, onHit),
+                new SimpleShipDisplayInfo<>(null, data));
     }
 
     /**
@@ -52,7 +52,7 @@ public class RectangleShip<T> extends BasicShip<T> {
      * @param onHit     the representation to display when the ship is hit.
      */
     public RectangleShip(Coordinate upperLeft, T data, T onHit) {
-        this("testship", upperLeft, 1, 1, data, onHit);
+        this("TestShip", upperLeft, 1, 1, data, onHit);
     }
 
     /**

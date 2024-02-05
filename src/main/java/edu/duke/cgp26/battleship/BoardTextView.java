@@ -96,4 +96,37 @@ public class BoardTextView {
     public String displayEnemyBoard() {
         return displayAnyBoard(toDisplay::whatIsAtForEnemy);
     }
+
+    /**
+     * Displays the player's board and the enemy's board side by side.
+     *
+     * @param enemyView   is the BoardTextView for the enemy's board.
+     * @param myHeader    is the header for the player's board.
+     * @param enemyHeader is the header for the enemy's board.
+     * @return the String that is the representation of the player's own board and the enemy's board side by side.
+     */
+    public String displayMyBoardWithEnemyNextToIt(BoardTextView enemyView, String myHeader, String enemyHeader) {
+        StringBuilder ans = new StringBuilder();
+        ans.append(" ".repeat(5));
+        ans.append(myHeader);
+        ans.append(" ".repeat(2 * toDisplay.getWidth() + 19 - myHeader.length()));
+        ans.append(enemyHeader);
+        ans.append("\n");
+
+        String myBoard = displayMyOwnBoard();
+        String enemyBoard = enemyView.displayEnemyBoard();
+
+        String[] myBoardLines = myBoard.split("\n");
+        String[] enemyBoardLines = enemyBoard.split("\n");
+
+        assert (myBoardLines.length == enemyBoardLines.length);
+        for (int i = 0; i < myBoardLines.length; i++) {
+            ans.append(myBoardLines[i]);
+            ans.append(" ".repeat(2 * toDisplay.getWidth() + 19 - myBoardLines[i].length()));
+            ans.append(enemyBoardLines[i]);
+            ans.append("\n");
+        }
+
+        return ans.toString();
+    }
 }
