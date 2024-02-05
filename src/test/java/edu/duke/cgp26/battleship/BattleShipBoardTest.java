@@ -117,6 +117,12 @@ class BattleShipBoardTest {
         assertFalse(s2.isSunk());
         assertSame(s2, b1.fireAt(new Coordinate(5, 5)));
         assertTrue(s2.isSunk());
+
+        // Test off the board Coordinates
+        assertThrows(IllegalArgumentException.class, () -> b1.fireAt(new Coordinate(-1, 1)));
+        assertThrows(IllegalArgumentException.class, () -> b1.fireAt(new Coordinate(1, -1)));
+        assertThrows(IllegalArgumentException.class, () -> b1.fireAt(new Coordinate(6, 1)));
+        assertThrows(IllegalArgumentException.class, () -> b1.fireAt(new Coordinate(1, 6)));
     }
 
     @Test

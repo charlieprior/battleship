@@ -45,6 +45,7 @@ public class App {
 
         App app = new App(player1, player2);
         app.doPlacementPhase();
+        app.doAttackingPhase();
     }
 
     /**
@@ -55,5 +56,38 @@ public class App {
     public void doPlacementPhase() throws IOException {
         player1.doPlacementPhase();
         player2.doPlacementPhase();
+    }
+
+    /**
+     * Perform one attack.
+     *
+     * @param attacker The attacking player.
+     * @param defender The defending player.
+     * @return true if the game is over, false otherwise.
+     * @throws IOException We will not handle this exception.
+     */
+    public boolean doOneAttack(TextPlayer attacker, TextPlayer defender) throws IOException {
+        attacker.playOneTurn(defender.theBoard, defender.view, defender.name);
+        if (defender.theBoard.checkIfLost()) {
+            attacker.printWin();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Perform the attacking phase of the game.
+     *
+     * @throws IOException We will not handle this exception.
+     */
+    public void doAttackingPhase() throws IOException {
+        while (true) {
+            if (doOneAttack(player1, player2)) {
+                return;
+            }
+            if (doOneAttack(player2, player1)) {
+                return;
+            }
+        }
     }
 }

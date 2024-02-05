@@ -5,13 +5,9 @@ import org.junit.jupiter.api.parallel.ResourceAccessMode;
 import org.junit.jupiter.api.parallel.ResourceLock;
 import org.junit.jupiter.api.parallel.Resources;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
     @Test
@@ -39,5 +35,41 @@ class AppTest {
         String expected = new String(expectedStream.readAllBytes());
         String actual = bytes.toString();
         assertEquals(expected, actual);
+    }
+
+    private App createGame(String inputData, OutputStream bytes) {
+        BufferedReader input = new BufferedReader(new StringReader(inputData));
+        PrintStream output = new PrintStream(bytes, true);
+        Board<Character> board1 = new BattleShipBoard<>(6, 6, 'X');
+        Board<Character> board2 = new BattleShipBoard<>(6, 6, 'X');
+
+        AbstractShipFactory<Character> factory = new V1ShipFactory();
+        TextPlayer player1 = new TextPlayer("A", board1, input, output, factory);
+        TextPlayer player2 = new TextPlayer("B", board2, input, output, factory);
+
+        App app = new App(player1, player2);
+
+        board1.tryAddShip(factory.makeSubmarine(new Placement(new Coordinate(0, 0), 'H')));
+        board2.tryAddShip(factory.makeSubmarine(new Placement(new Coordinate(0, 0), 'H')));
+
+        return app;
+    }
+
+    @Test
+    public void test_doAttackingPhase1() throws IOException {
+        String inputData = "A0\nA0\nA1\nA1\n";
+        OutputStream bytes = new ByteArrayOutputStream();
+        App app = createGame(inputData, bytes);
+        app.doAttackingPhase();
+        assertTrue(app.player2.theBoard.checkIfLost());
+    }
+
+    @Test
+    public void test_doAttackingPhase2() throws IOException {
+        String inputData = "A0\nA0\nA2\nA1\n";
+        OutputStream bytes = new ByteArrayOutputStream();
+        App app = createGame(inputData, bytes);
+        app.doAttackingPhase();
+        assertTrue(app.player1.theBoard.checkIfLost());
     }
 }

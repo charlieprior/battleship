@@ -149,13 +149,26 @@ public class BattleShipBoard<T> implements Board<T> {
      */
     @Override
     public Ship<T> fireAt(Coordinate c) {
+        // Check Coordinate is in bounds
+        if (!(0 <= c.getRow())) {
+            throw new IllegalArgumentException("That coordinate is invalid: it is off the top of the board.\n");
+        }
+        if (!(c.getRow() < height)) {
+            throw new IllegalArgumentException("That coordinate is invalid: it is off the bottom of the board.\n");
+        }
+        if (!(0 <= c.getColumn())) {
+            throw new IllegalArgumentException("That coordinate is invalid: it is off the left of the board.\n");
+        }
+        if (!(c.getColumn() < width)) {
+            throw new IllegalArgumentException("That coordinate is invalid: it is off the right of the board.\n");
+        }
         for (Ship<T> s : myShips) {
             if (s.occupiesCoordinates(c)) {
                 s.recordHitAt(c);
                 return s;
             }
         }
-        enemyMisses.add(c); // TODO: test
+        enemyMisses.add(c);
         return null;
     }
 

@@ -75,9 +75,9 @@ public class TextPlayer {
      * @param s The message to print.
      */
     private void print(String s) {
-        out.println("---------------------------------------------------------------------------");
+        out.println("-".repeat(75));
         out.print(s);
-        out.println("---------------------------------------------------------------------------");
+        out.println("-".repeat(75));
     }
 
     /**
@@ -101,9 +101,25 @@ public class TextPlayer {
     }
 
     /**
-     * Reads a placement String and places it.
+     * Reads a Coordinate String and returns it.
      *
-     * @param prompt the placement String.
+     * @param prompt the prompt to display.
+     * @return the Coordinate.
+     * @throws IOException We will not handle this exception.
+     */
+    public Coordinate readCoordinate(String prompt) throws IOException {
+        print(prompt);
+        String s = inputReader.readLine();
+        if (s == null) {
+            throw new EOFException("Unexpected end of file\n");
+        }
+        return new Coordinate(s);
+    }
+
+    /**
+     * Reads a placement String and returns it.
+     *
+     * @param prompt the prompt to display.
      * @return the Placement
      * @throws IOException We will not handle this exception.
      */
@@ -161,5 +177,47 @@ public class TextPlayer {
         for (String s : shipsToPlace) {
             doOnePlacement(s, shipCreationFns.get(s));
         }
+    }
+
+    /**
+     * Play one turn of the attacking phase of the game.
+     *
+     * @param enemyBoard the enemy's board.
+     * @param enemyView  the view of the enemy's board.
+     * @param enemyName  the name of the enemy.
+     * @throws IOException We will not handle this exception.
+     */
+    public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName) throws IOException {
+        print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
+        while (true) {
+            try {
+                Coordinate c = readCoordinate("Player " + name + " enter the coordinate for your attack:\n");
+                if (enemyBoard.whatIsAtForEnemy(c) != null) {
+                    // We've already looked at this coordinate
+                    print("That coordinate has already been selected, please choose another.\n");
+                    continue;
+                }
+                Ship<Character> s = enemyBoard.fireAt(c);
+                if (s == null) {
+                    print("You missed!\n");
+                } else {
+                    if (s.isSunk()) {
+                        print("You sunk a " + s.getName() + "!\n");
+                    } else {
+                        print("You hit a " + s.getName() + "!\n");
+                    }
+                }
+                return;
+            } catch (IllegalArgumentException e) {
+                print(e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Print a message to the player that they have won.
+     */
+    public void printWin() {
+        print("Player " + name + " has won!\n");
     }
 }
