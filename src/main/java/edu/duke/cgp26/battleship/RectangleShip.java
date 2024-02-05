@@ -8,19 +8,24 @@ import java.util.HashSet;
  * @param <T> the representation type.
  */
 public class RectangleShip<T> extends BasicShip<T> {
+    /**
+     * The name of the ship.
+     */
     final String name;
 
     /**
      * Constructor for making a RectangleShip from its coordinates and a {@link ShipDisplayInfo}.
      *
-     * @param name        the name of the ship.
-     * @param upperLeft   the upper left coordinate of the ship.
-     * @param width       the ship's width.
-     * @param height      the ship's height.
-     * @param displayInfo the ShipDisplayInfo of the ship.
+     * @param name             the name of the ship.
+     * @param upperLeft        the upper left coordinate of the ship.
+     * @param width            the ship's width.
+     * @param height           the ship's height.
+     * @param displayInfo      the ShipDisplayInfo of the ship.
+     * @param enemyDisplayInfo the ShipDisplayInfo of the ship from an enemy perspective.
      */
-    public RectangleShip(String name, Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> displayInfo) {
-        super(makeCoords(upperLeft, width, height), displayInfo);
+    public RectangleShip(String name, Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> displayInfo,
+                         ShipDisplayInfo<T> enemyDisplayInfo) {
+        super(makeCoords(upperLeft, width, height), displayInfo, enemyDisplayInfo);
         this.name = name;
     }
 
@@ -35,7 +40,8 @@ public class RectangleShip<T> extends BasicShip<T> {
      * @param onHit     the representation to display when the ship is hit.
      */
     public RectangleShip(String name, Coordinate upperLeft, int width, int height, T data, T onHit) {
-        this(name, upperLeft, width, height, new SimpleShipDisplayInfo<>(data, onHit));
+        this(name, upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit),
+                new SimpleShipDisplayInfo<T>(null, data));
     }
 
     /**

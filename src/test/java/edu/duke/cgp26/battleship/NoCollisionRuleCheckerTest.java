@@ -9,7 +9,7 @@ class NoCollisionRuleCheckerTest {
     public void test_rule() {
         V1ShipFactory factory = new V1ShipFactory();
         PlacementRuleChecker<Character> checker = new NoCollisionRuleChecker<>(null);
-        Board<Character> board = new BattleShipBoard<>(5, 5, checker);
+        Board<Character> board = new BattleShipBoard<>(5, 5, checker, 'X');
 
         Ship<Character> s1 = factory.makeBattleship(new Placement("A1H"));
         assertNull(checker.checkPlacement(s1, board)); // Add to empty board
@@ -31,7 +31,7 @@ class NoCollisionRuleCheckerTest {
     public void test_combo() {
         V1ShipFactory factory = new V1ShipFactory();
         PlacementRuleChecker<Character> checker = new NoCollisionRuleChecker<>(new InBoundsRuleChecker<>(null));
-        Board<Character> board = new BattleShipBoard<>(5, 5, checker);
+        Board<Character> board = new BattleShipBoard<>(5, 5, checker, 'X');
 
         Ship<Character> s1 = factory.makeBattleship(new Placement("A0H"));
         assertNull(checker.checkPlacement(s1, board)); // in bounds and non-overlapping

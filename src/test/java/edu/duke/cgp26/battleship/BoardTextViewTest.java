@@ -7,11 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BoardTextViewTest {
     private void emptyBoardHelper(int w, int h, String expectedHeader, String expectedBody) {
-        Board<Character> b1 = new BattleShipBoard<>(w, h);
+        Board<Character> b1 = new BattleShipBoard<>(w, h, 'X');
         BoardTextView view = new BoardTextView(b1);
         assertEquals(expectedHeader, view.makeHeader());
         String expected = expectedHeader + expectedBody + expectedHeader;
         assertEquals(expected, view.displayMyOwnBoard());
+        assertEquals(expected, view.displayEnemyBoard());
     }
 
     @Test
@@ -43,7 +44,7 @@ public class BoardTextViewTest {
 
     @Test
     public void test_display_filled_3by5() {
-        Board<Character> b1 = new BattleShipBoard<>(3, 5);
+        Board<Character> b1 = new BattleShipBoard<>(3, 5, 'X');
         BoardTextView view = new BoardTextView(b1);
         b1.tryAddShip(new RectangleShip<Character>(new Coordinate(1, 2), 's', '*'));
         String expected = "  0|1|2\n" +
@@ -72,12 +73,41 @@ public class BoardTextViewTest {
                 "E  |s|  E\n" +
                 "  0|1|2\n";
         assertEquals(expected, view.displayMyOwnBoard());
+
+        b1.fireAt(new Coordinate(1, 2));
+        expected = "  0|1|2\n" +
+                "A s| |  A\n" +
+                "B  | |* B\n" +
+                "C  | |  C\n" +
+                "D  | |  D\n" +
+                "E  |s|  E\n" +
+                "  0|1|2\n";
+        assertEquals(expected, view.displayMyOwnBoard());
+        expected = "  0|1|2\n" +
+                "A  | |  A\n" +
+                "B  | |s B\n" +
+                "C  | |  C\n" +
+                "D  | |  D\n" +
+                "E  | |  E\n" +
+                "  0|1|2\n";
+        assertEquals(expected, view.displayEnemyBoard());
+
+        b1.fireAt(new Coordinate(0, 1));
+        expected = "  0|1|2\n" +
+                "A  |X|  A\n" +
+                "B  | |s B\n" +
+                "C  | |  C\n" +
+                "D  | |  D\n" +
+                "E  | |  E\n" +
+                "  0|1|2\n";
+        assertEquals(expected, view.displayEnemyBoard());
     }
+
 
     @Test
     public void test_invalid_board_size() {
-        Board<Character> wideBoard = new BattleShipBoard<Character>(11, 20);
-        Board<Character> tallBoard = new BattleShipBoard<Character>(10, 27);
+        Board<Character> wideBoard = new BattleShipBoard<Character>(11, 20, 'X');
+        Board<Character> tallBoard = new BattleShipBoard<Character>(10, 27, 'X');
         assertThrows(IllegalArgumentException.class, () -> new BoardTextView(wideBoard));
         assertThrows(IllegalArgumentException.class, () -> new BoardTextView(tallBoard));
     }

@@ -85,10 +85,12 @@ class RectangleShipTest {
     @Test
     public void test_getDisplayInfo() {
         RectangleShip<Character> rs = new RectangleShip<>("submarine", new Coordinate(1, 2), 1, 3, 's', '*');
-        assertEquals('s', rs.getDisplayInfoAt(new Coordinate(1, 2)));
+        assertEquals('s', rs.getDisplayInfoAt(new Coordinate(1, 2), true));
+        assertNull(rs.getDisplayInfoAt(new Coordinate(1, 2), false));
         rs.recordHitAt(new Coordinate(1, 2));
-        assertEquals('*', rs.getDisplayInfoAt(new Coordinate(1, 2)));
-        assertThrows(IllegalArgumentException.class, () -> rs.getDisplayInfoAt(new Coordinate(1, 4)));
+        assertEquals('*', rs.getDisplayInfoAt(new Coordinate(1, 2), true));
+        assertEquals('s', rs.getDisplayInfoAt(new Coordinate(1, 2), false));
+        assertThrows(IllegalArgumentException.class, () -> rs.getDisplayInfoAt(new Coordinate(1, 4), true));
     }
 
     @Test

@@ -13,6 +13,10 @@ public abstract class BasicShip<T> implements Ship<T> {
      */
     protected ShipDisplayInfo<T> myDisplayInfo;
     /**
+     * The ShipDisplayInfo of the ship from an enemy perspective.
+     */
+    protected ShipDisplayInfo<T> enemyDisplayInfo;
+    /**
      * The {@link Coordinate}s the ship occupies.
      * True if hit, false otherwise.
      */
@@ -21,12 +25,14 @@ public abstract class BasicShip<T> implements Ship<T> {
     /**
      * Construct a BasicShip given an Iterable of Coordinates.
      *
-     * @param where         the Coordinates of the ship.
-     * @param myDisplayInfo the ShipDisplayInfo of the ship.
+     * @param where            the Coordinates of the ship.
+     * @param myDisplayInfo    the ShipDisplayInfo of the ship.
+     * @param enemyDisplayInfo the ShipDisplayInfo of the ship from an enemy perspective.
      */
-    public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> myDisplayInfo) {
+    public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> myDisplayInfo, ShipDisplayInfo<T> enemyDisplayInfo) {
         this.myPieces = new HashMap<>();
         this.myDisplayInfo = myDisplayInfo;
+        this.enemyDisplayInfo = enemyDisplayInfo;
         for (Coordinate c : where) {
             myPieces.put(c, false);
         }
@@ -101,14 +107,19 @@ public abstract class BasicShip<T> implements Ship<T> {
      * Return the Character at the given coordinate. This coordinate
      * must be part of the ship.
      *
-     * @param where is the coordinate to return information for
+     * @param where  is the coordinate to return information for.
+     * @param myShip is true if the view is for the owner of the ship, false otherwise.
      * @return The view-specific information at that coordinate.
-     * @throws IllegalArgumentException if where is not part of the Ship
+     * @throws IllegalArgumentException if where is not part of the Ship.
      */
     @Override
-    public T getDisplayInfoAt(Coordinate where) {
+    public T getDisplayInfoAt(Coordinate where, boolean myShip) {
         checkCoordinateInThisShip(where);
-        return myDisplayInfo.getInfo(where, myPieces.get(where));
+        if (myShip) {
+            return myDisplayInfo.getInfo(where, myPieces.get(where));
+        } else {
+            return enemyDisplayInfo.getInfo(where, myPieces.get(where));
+        }
     }
 
     @Override

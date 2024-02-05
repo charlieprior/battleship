@@ -1,6 +1,7 @@
 package edu.duke.cgp26.battleship;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -10,6 +11,10 @@ import java.util.List;
  */
 public class BattleShipBoard<T> implements Board<T> {
     /**
+     * The representation of a miss.
+     */
+    final T missInfo;
+    /**
      * The width.
      */
     private final int width;
@@ -17,11 +22,15 @@ public class BattleShipBoard<T> implements Board<T> {
      * The height.
      */
     private final int height;
-
     /**
      * List of {@link Ship}s this Board contains.
      */
     private final List<Ship<T>> myShips;
+
+    /**
+     * The set of enemy misses.
+     */
+    private final HashSet<Coordinate> enemyMisses;
 
     /**
      * The rule checker for placing ships.
@@ -34,9 +43,10 @@ public class BattleShipBoard<T> implements Board<T> {
      * @param width            the width of the newly constructed board.
      * @param height           the height of the newly constructed board.
      * @param placementChecker the rule checker for placing ships.
+     * @param missInfo         the representation of a miss.
      * @throws IllegalArgumentException if the width or height are less than zero.
      */
-    public BattleShipBoard(int width, int height, PlacementRuleChecker<T> placementChecker) {
+    public BattleShipBoard(int width, int height, PlacementRuleChecker<T> placementChecker, T missInfo) {
         this.placementChecker = placementChecker;
         this.myShips = new ArrayList<>();
         if (width <= 0) {
@@ -47,17 +57,20 @@ public class BattleShipBoard<T> implements Board<T> {
         }
         this.width = width;
         this.height = height;
+        this.enemyMisses = new HashSet<>();
+        this.missInfo = missInfo;
     }
 
     /**
      * Constructs a BattleShipBoard with the specified width and height.
      *
-     * @param width  the width of the newly constructed board.
-     * @param height the height of the newly constructed board.
+     * @param width    the width of the newly constructed board.
+     * @param height   the height of the newly constructed board.
+     * @param missInfo the representation of a miss.
      * @throws IllegalArgumentException if the width or height are less than zero.
      */
-    public BattleShipBoard(int width, int height) {
-        this(width, height, new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null)));
+    public BattleShipBoard(int width, int height, T missInfo) {
+        this(width, height, new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null)), missInfo);
     }
 
     /**
@@ -93,17 +106,56 @@ public class BattleShipBoard<T> implements Board<T> {
     }
 
     /**
-     * Represent what is at a {@link Coordinate} on the Board.
+     * Represent what is at a {@link Coordinate} on the Board from our perspective.
      *
      * @param where the Coordinate to look at.
-     * @return the representation of what is at that Coordinate, or null if unoccupied
+     * @return the representation of what is at that Coordinate, or null if unoccupied.
      */
-    public T whatIsAt(Coordinate where) {
+    public T whatIsAtForSelf(Coordinate where) {
+        return whatIsAt(where, true);
+    }
+
+    /**
+     * Represent what is at a {@link Coordinate} on the Board from the enemy's perspective.
+     *
+     * @param where the Coordinate to look at.
+     * @return the representation of what is at that Coordinate or null if unoccupied.
+     */
+    public T whatIsAtForEnemy(Coordinate where) {
+        return whatIsAt(where, false);
+    }
+
+    /**
+     * Represent what is at a {@link Coordinate} on the Board from any perspective.
+     *
+     * @param where  the Coordinate to look at.
+     * @param isSelf true if the perspective is from our side, false if from the enemy side.
+     * @return the representation of what is at that Coordinate, or null if unoccupied.
+     */
+    protected T whatIsAt(Coordinate where, boolean isSelf) {
         for (Ship<T> s : myShips) {
             if (s.occupiesCoordinates(where)) {
-                return s.getDisplayInfoAt(where);
+                return s.getDisplayInfoAt(where, isSelf);
             }
         }
+        return (enemyMisses.contains(where) && !isSelf) ? missInfo : null;
+    }
+
+    /**
+     * Fire at a given coordinate on the board.
+     *
+     * @param c the coordinate to fire at.
+     * @return the ship that was hit, or null if no ship was hit.
+     */
+    @Override
+    public Ship<T> fireAt(Coordinate c) {
+        for (Ship<T> s : myShips) {
+            if (s.occupiesCoordinates(c)) {
+                s.recordHitAt(c);
+                return s;
+            }
+        }
+        enemyMisses.add(c); // TODO: test
         return null;
     }
 }

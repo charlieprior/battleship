@@ -1,5 +1,7 @@
 package edu.duke.cgp26.battleship;
 
+import java.util.function.Function;
+
 /**
  * This class handles textual display of
  * a {@link Board} (i.e., converting it to a string to show
@@ -38,9 +40,9 @@ public class BoardTextView {
     String makeHeader() {
         StringBuilder ans = new StringBuilder("  ");
         String sep = "";
-        for (int i = 0; i < toDisplay.getWidth(); i++) {
+        for (int col = 0; col < toDisplay.getWidth(); col++) {
             ans.append(sep);
-            ans.append(i);
+            ans.append(col);
             sep = "|";
         }
         ans.append("\n");
@@ -48,11 +50,12 @@ public class BoardTextView {
     }
 
     /**
-     * Displays the player's own board.
+     * Displays a board given a function that can get the character at a given coordinate.
      *
+     * @param getSquareFn a function that takes a Coordinate and returns the character at that coordinate.
      * @return the String that is the representation of the player's own board.
      */
-    public String displayMyOwnBoard() {
+    protected String displayAnyBoard(Function<Coordinate, Character> getSquareFn) {
         StringBuilder ans = new StringBuilder(makeHeader());
         for (int row = 0; row < toDisplay.getHeight(); row++) {
             // Since we enforce the height is < 27, this should be fine
@@ -61,7 +64,7 @@ public class BoardTextView {
             String sep = " ";
             for (int col = 0; col < toDisplay.getWidth(); col++) {
                 ans.append(sep);
-                Character disp = toDisplay.whatIsAt(new Coordinate(row, col));
+                Character disp = getSquareFn.apply(new Coordinate(row, col));
                 if (disp == null) {
                     disp = ' ';
                 }
@@ -74,5 +77,23 @@ public class BoardTextView {
         }
         ans.append(makeHeader());
         return ans.toString();
+    }
+
+    /**
+     * Displays our own board.
+     *
+     * @return the String that is the representation of the player's own board.
+     */
+    public String displayMyOwnBoard() {
+        return displayAnyBoard(toDisplay::whatIsAtForSelf);
+    }
+
+    /**
+     * Displays the enemy's board.
+     *
+     * @return the String that is the representation of the enemy's board.
+     */
+    public String displayEnemyBoard() {
+        return displayAnyBoard(toDisplay::whatIsAtForEnemy);
     }
 }
