@@ -118,4 +118,32 @@ class BattleShipBoardTest {
         assertSame(s2, b1.fireAt(new Coordinate(5, 5)));
         assertTrue(s2.isSunk());
     }
+
+    @Test
+    public void test_checkIfLost() {
+        V1ShipFactory factory = new V1ShipFactory();
+        Board<Character> b1 = new BattleShipBoard<>(6, 6, 'X');
+        Ship<Character> s1 = factory.makeSubmarine(new Placement("A0H"));
+        Ship<Character> s2 = factory.makeCarrier(new Placement("A5V"));
+        assertNull(b1.tryAddShip(s1));
+        assertNull(b1.tryAddShip(s2));
+
+        assertFalse(b1.checkIfLost());
+        b1.fireAt(new Coordinate(0, 0));
+        assertFalse(b1.checkIfLost());
+        b1.fireAt(new Coordinate(0, 1));
+        assertFalse(b1.checkIfLost());
+        b1.fireAt(new Coordinate(0, 5));
+        assertFalse(b1.checkIfLost());
+        b1.fireAt(new Coordinate(1, 5));
+        assertFalse(b1.checkIfLost());
+        b1.fireAt(new Coordinate(2, 5));
+        assertFalse(b1.checkIfLost());
+        b1.fireAt(new Coordinate(3, 5));
+        assertFalse(b1.checkIfLost());
+        b1.fireAt(new Coordinate(4, 5));
+        assertFalse(b1.checkIfLost());
+        b1.fireAt(new Coordinate(5, 5));
+        assertTrue(b1.checkIfLost());
+    }
 }

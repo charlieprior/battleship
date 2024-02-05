@@ -158,4 +158,19 @@ public class BattleShipBoard<T> implements Board<T> {
         enemyMisses.add(c); // TODO: test
         return null;
     }
+
+    /**
+     * Check if the game has been lost.
+     *
+     * @return true if the game has been lost, false otherwise.
+     */
+    @Override
+    public boolean checkIfLost() {
+        for (Ship<T> s : myShips) {
+            if (!s.isSunk()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

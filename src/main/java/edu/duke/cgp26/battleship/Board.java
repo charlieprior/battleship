@@ -52,4 +52,11 @@ public interface Board<T> {
      * @return the ship that was hit, or null if no ship was hit.
      */
     Ship<T> fireAt(Coordinate c);
+
+    /**
+     * Check if the game has been lost.
+     *
+     * @return true if the game has been lost, false otherwise.
+     */
+    boolean checkIfLost();
 }
