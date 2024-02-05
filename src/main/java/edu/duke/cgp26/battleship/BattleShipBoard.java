@@ -82,14 +82,14 @@ public class BattleShipBoard<T> implements Board<T> {
      * Try to add a {@link Ship} to the Board, according to the placement checker.
      *
      * @param toAdd the Ship to add.
-     * @return true if successful, false otherwise.
+     * @return null if the ship can be placed, a description of the error otherwise.
      */
-    public boolean tryAddShip(Ship<T> toAdd) {
-        if (placementChecker.checkPlacement(toAdd, this)) {
+    public String tryAddShip(Ship<T> toAdd) {
+        String result = placementChecker.checkPlacement(toAdd, this);
+        if (result == null) {
             myShips.add(toAdd);
-            return true;
         }
-        return false;
+        return result;
     }
 
     /**

@@ -35,7 +35,7 @@ public class Placement {
      */
     public Placement(String text) {
         if (text.length() != 3) {
-            throw new IllegalArgumentException("placement String must be 3 characters of the form A0V\n");
+            throw new IllegalArgumentException("That placement is invalid: it does not have the correct format.\n");
         }
         text = text.toUpperCase();
         Coordinate coordinate = new Coordinate(text.substring(0, 2));
@@ -52,7 +52,7 @@ public class Placement {
      */
     private void checkValidPlacement(char placement) {
         if (placement != 'V' && placement != 'H') {
-            throw new IllegalArgumentException("placement must be V or H\n");
+            throw new IllegalArgumentException("That placement is invalid: it does not have the correct format.\n");
         }
     }
 

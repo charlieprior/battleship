@@ -5,14 +5,151 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TextPlayerTest {
     private TextPlayer createTextPlayer(int w, int h, String inputData, OutputStream bytes) {
         BufferedReader input = new BufferedReader(new StringReader(inputData));
         PrintStream output = new PrintStream(bytes, true);
-        Board<Character> board = new BattleShipBoard<Character>(w, h);
+        Board<Character> board = new BattleShipBoard<>(w, h);
         V1ShipFactory shipFactory = new V1ShipFactory();
         return new TextPlayer("A", board, input, output, shipFactory);
+    }
+
+    @Test
+    void test_invalid_orientation() throws IOException {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        TextPlayer player = createTextPlayer(10, 20, "A0Q\nA0V", bytes);
+        AbstractShipFactory<Character> factory = new V1ShipFactory();
+
+        player.doOnePlacement("Destroyer", factory::makeDestroyer);
+        assertEquals("---------------------------------------------------------------------------\n" +
+                        "Player A where do you want to place a Destroyer?\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "That placement is invalid: it does not have the correct format.\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "Player A where do you want to place a Destroyer?\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "  0|1|2|3|4|5|6|7|8|9\n" +
+                        "A d| | | | | | | | |  A\n" +
+                        "B d| | | | | | | | |  B\n" +
+                        "C d| | | | | | | | |  C\n" +
+                        "D  | | | | | | | | |  D\n" +
+                        "E  | | | | | | | | |  E\n" +
+                        "F  | | | | | | | | |  F\n" +
+                        "G  | | | | | | | | |  G\n" +
+                        "H  | | | | | | | | |  H\n" +
+                        "I  | | | | | | | | |  I\n" +
+                        "J  | | | | | | | | |  J\n" +
+                        "K  | | | | | | | | |  K\n" +
+                        "L  | | | | | | | | |  L\n" +
+                        "M  | | | | | | | | |  M\n" +
+                        "N  | | | | | | | | |  N\n" +
+                        "O  | | | | | | | | |  O\n" +
+                        "P  | | | | | | | | |  P\n" +
+                        "Q  | | | | | | | | |  Q\n" +
+                        "R  | | | | | | | | |  R\n" +
+                        "S  | | | | | | | | |  S\n" +
+                        "T  | | | | | | | | |  T\n" +
+                        "  0|1|2|3|4|5|6|7|8|9\n" +
+                        "---------------------------------------------------------------------------\n",
+                bytes.toString());
+    }
+
+    @Test
+    void test_invalid_placement_string() throws IOException {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        TextPlayer player = createTextPlayer(10, 20, "AAV\nA0V", bytes);
+        AbstractShipFactory<Character> factory = new V1ShipFactory();
+
+        player.doOnePlacement("Destroyer", factory::makeDestroyer);
+        assertEquals("---------------------------------------------------------------------------\n" +
+                        "Player A where do you want to place a Destroyer?\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "The second character of the coordinate must be a number\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "Player A where do you want to place a Destroyer?\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "  0|1|2|3|4|5|6|7|8|9\n" +
+                        "A d| | | | | | | | |  A\n" +
+                        "B d| | | | | | | | |  B\n" +
+                        "C d| | | | | | | | |  C\n" +
+                        "D  | | | | | | | | |  D\n" +
+                        "E  | | | | | | | | |  E\n" +
+                        "F  | | | | | | | | |  F\n" +
+                        "G  | | | | | | | | |  G\n" +
+                        "H  | | | | | | | | |  H\n" +
+                        "I  | | | | | | | | |  I\n" +
+                        "J  | | | | | | | | |  J\n" +
+                        "K  | | | | | | | | |  K\n" +
+                        "L  | | | | | | | | |  L\n" +
+                        "M  | | | | | | | | |  M\n" +
+                        "N  | | | | | | | | |  N\n" +
+                        "O  | | | | | | | | |  O\n" +
+                        "P  | | | | | | | | |  P\n" +
+                        "Q  | | | | | | | | |  Q\n" +
+                        "R  | | | | | | | | |  R\n" +
+                        "S  | | | | | | | | |  S\n" +
+                        "T  | | | | | | | | |  T\n" +
+                        "  0|1|2|3|4|5|6|7|8|9\n" +
+                        "---------------------------------------------------------------------------\n",
+                bytes.toString());
+    }
+
+    @Test
+    void test_invalid_ship_placement() throws IOException {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        TextPlayer player = createTextPlayer(10, 20, "A9H\nA0V", bytes);
+        AbstractShipFactory<Character> factory = new V1ShipFactory();
+
+        player.doOnePlacement("Destroyer", factory::makeDestroyer);
+        assertEquals("---------------------------------------------------------------------------\n" +
+                        "Player A where do you want to place a Destroyer?\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "That placement is invalid: the ship goes off the right of the board.\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "Player A where do you want to place a Destroyer?\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "---------------------------------------------------------------------------\n" +
+                        "  0|1|2|3|4|5|6|7|8|9\n" +
+                        "A d| | | | | | | | |  A\n" +
+                        "B d| | | | | | | | |  B\n" +
+                        "C d| | | | | | | | |  C\n" +
+                        "D  | | | | | | | | |  D\n" +
+                        "E  | | | | | | | | |  E\n" +
+                        "F  | | | | | | | | |  F\n" +
+                        "G  | | | | | | | | |  G\n" +
+                        "H  | | | | | | | | |  H\n" +
+                        "I  | | | | | | | | |  I\n" +
+                        "J  | | | | | | | | |  J\n" +
+                        "K  | | | | | | | | |  K\n" +
+                        "L  | | | | | | | | |  L\n" +
+                        "M  | | | | | | | | |  M\n" +
+                        "N  | | | | | | | | |  N\n" +
+                        "O  | | | | | | | | |  O\n" +
+                        "P  | | | | | | | | |  P\n" +
+                        "Q  | | | | | | | | |  Q\n" +
+                        "R  | | | | | | | | |  R\n" +
+                        "S  | | | | | | | | |  S\n" +
+                        "T  | | | | | | | | |  T\n" +
+                        "  0|1|2|3|4|5|6|7|8|9\n" +
+                        "---------------------------------------------------------------------------\n",
+                bytes.toString());
+    }
+
+    @Test
+    void test_empty_file() {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        TextPlayer player = createTextPlayer(10, 20, "", bytes);
+        assertThrows(EOFException.class, () -> player.readPlacement(""));
     }
 
     @Test

@@ -25,9 +25,9 @@ public interface Board<T> {
      * Try to add a {@link Ship} to the Board.
      *
      * @param toAdd the Ship to add.
-     * @return true if successful, false otherwise.
+     * @return null if the ship can be placed, a description of the error otherwise.
      */
-    boolean tryAddShip(Ship<T> toAdd);
+    String tryAddShip(Ship<T> toAdd);
 
     /**
      * Represent what is at a {@link Coordinate} on the Board.

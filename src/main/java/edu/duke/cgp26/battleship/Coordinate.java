@@ -42,10 +42,10 @@ public class Coordinate {
         char colLetter = text.charAt(1);
 
         if (rowLetter < 'A' || rowLetter > 'Z') {
-            throw new IllegalArgumentException("First character must be a letter\n");
+            throw new IllegalArgumentException("The first character of the coordinate must be a letter\n");
         }
         if (colLetter < '0' || colLetter > '9') {
-            throw new IllegalArgumentException("Second character must be a number\n");
+            throw new IllegalArgumentException("The second character of the coordinate must be a number\n");
         }
 
         this.row = rowLetter - 'A';

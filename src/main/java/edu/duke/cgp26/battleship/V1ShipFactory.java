@@ -25,6 +25,7 @@ public class V1ShipFactory implements AbstractShipFactory<Character> {
             width = h;
             height = w;
         }
+        // TODO: Could add checking here to make sure placement is valid for type of ship (or in V2)
         return new RectangleShip<Character>(name, where.getWhere(), width, height, letter, '*');
     }
 

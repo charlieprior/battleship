@@ -1,6 +1,7 @@
 package edu.duke.cgp26.battleship;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -109,6 +110,9 @@ public class TextPlayer {
     public Placement readPlacement(String prompt) throws IOException {
         print(prompt);
         String s = inputReader.readLine();
+        if (s == null) {
+            throw new EOFException("Unexpected end of file\n");
+        }
         return new Placement(s);
     }
 
@@ -120,10 +124,21 @@ public class TextPlayer {
      * @throws IOException We will not handle this exception.
      */
     public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn) throws IOException {
-        Placement p = readPlacement("Player " + name + " where do you want to place a " + shipName + "?\n");
-        Ship<Character> s = createFn.apply(p);
-        theBoard.tryAddShip(s);
-        print(view.displayMyOwnBoard());
+        while (true) {
+            try {
+                Placement p = readPlacement("Player " + name + " where do you want to place a " + shipName + "?\n");
+                Ship<Character> s = createFn.apply(p);
+                String result = theBoard.tryAddShip(s);
+                if (result != null) {
+                    print(result);
+                    continue;
+                }
+                print(view.displayMyOwnBoard());
+                return;
+            } catch (IllegalArgumentException e) {
+                print(e.getMessage());
+            }
+        }
     }
 
     /**

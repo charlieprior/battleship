@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BattleShipBoardTest {
     private void addBasicShipAtCoord(Board<Character> b, Coordinate coord) {
         Ship<Character> s = new RectangleShip<>(coord, 's', '*');
-        assertTrue(b.tryAddShip(s));
+        assertNull(b.tryAddShip(s));
     }
 
     private <T> void checkWhatIsAtBoard(Board<T> b, T[][] expected) {
@@ -53,9 +53,9 @@ class BattleShipBoardTest {
         V1ShipFactory factory = new V1ShipFactory();
         Board<Character> b1 = new BattleShipBoard<>(6, 6);
         Ship<Character> s1 = factory.makeSubmarine(new Placement("A0H"));
-        assertTrue(b1.tryAddShip(s1));
+        assertNull(b1.tryAddShip(s1));
 
         Ship<Character> s2 = factory.makeBattleship(new Placement("A0V"));
-        assertFalse(b1.tryAddShip(s2));
+        assertNotNull(b1.tryAddShip(s2));
     }
 }

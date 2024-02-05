@@ -25,27 +25,28 @@ public abstract class PlacementRuleChecker<T> {
      *
      * @param theShip  the ship to check.
      * @param theBoard the board to check.
-     * @return true if the placement is legal, false otherwise.
+     * @return null if the ship can be placed, a description of the error otherwise.
      */
-    protected abstract boolean checkMyRule(Ship<T> theShip, Board<T> theBoard);
+    protected abstract String checkMyRule(Ship<T> theShip, Board<T> theBoard);
 
     /**
      * Check if the placement of theShip on theBoard is legal according to this rule and any subsequent rules.
      *
      * @param theShip  the ship to check.
      * @param theBoard the board to check.
-     * @return true if the placement is legal, false otherwise.
+     * @return null if the ship can be placed, a description of the error otherwise.
      */
-    public boolean checkPlacement(Ship<T> theShip, Board<T> theBoard) {
+    public String checkPlacement(Ship<T> theShip, Board<T> theBoard) {
+        String result = checkMyRule(theShip, theBoard);
         // if we fail our own rule: stop the placement is not legal
-        if (!checkMyRule(theShip, theBoard)) {
-            return false;
+        if (result != null) {
+            return result;
         }
         // otherwise, ask the rest of the chain.
         if (next != null) {
             return next.checkPlacement(theShip, theBoard);
         }
         // if there are no more rules, then the placement is legal
-        return true;
+        return null;
     }
 }
