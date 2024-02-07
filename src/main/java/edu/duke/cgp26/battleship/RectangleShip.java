@@ -14,7 +14,8 @@ public class RectangleShip<T> extends BasicShip<T> {
     final String name;
 
     /**
-     * Constructor for making a RectangleShip from its coordinates and a {@link ShipDisplayInfo}.
+     * Constructor for making a RectangleShip from its coordinates and a {@link ShipDisplayInfo}
+     * for both the ship and the enemy.
      *
      * @param name             the name of the ship.
      * @param upperLeft        the upper left coordinate of the ship.
@@ -30,7 +31,7 @@ public class RectangleShip<T> extends BasicShip<T> {
     }
 
     /**
-     * Helper constructor to initialize the {@link ShipDisplayInfo}.
+     * Helper constructor to initialize the {@link ShipDisplayInfo}s.
      *
      * @param name      the name of the ship.
      * @param upperLeft the upper left coordinate of the ship.
