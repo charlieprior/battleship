@@ -7,12 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Placement changed to accept U, D, L, R">
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleshipShip.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/BattleshipShipTest.java" afterDir="false" />
+    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Added BattleshipShip.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/CarrierShip.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/CarrierShipTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/RectangleShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/RectangleShip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/V1ShipFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/V1ShipFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleshipShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleshipShip.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +191,7 @@
       <workItem from="1707150975617" duration="10660000" />
       <workItem from="1707245478829" duration="1622000" />
       <workItem from="1707249740441" duration="84000" />
-      <workItem from="1707254276756" duration="3749000" />
+      <workItem from="1707254276756" duration="5429000" />
     </task>
     <task id="LOCAL-00001" summary="Task 19">
       <option name="closed" value="true" />
@@ -234,7 +233,23 @@
       <option name="project" value="LOCAL" />
       <updated>1707270357318</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Small changes to documentation.">
+      <option name="closed" value="true" />
+      <created>1707272260161</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1707272260161</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added BattleshipShip.">
+      <option name="closed" value="true" />
+      <created>1707272271959</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1707272271959</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,7 +273,9 @@
     <MESSAGE value="Task 21" />
     <MESSAGE value="Task 22 &amp; Goal 5 &amp; Version 1" />
     <MESSAGE value="Placement changed to accept U, D, L, R" />
-    <option name="LAST_COMMIT_MESSAGE" value="Placement changed to accept U, D, L, R" />
+    <MESSAGE value="Small changes to documentation." />
+    <MESSAGE value="Added BattleshipShip." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added BattleshipShip." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -269,7 +286,7 @@
     <SUITE FILE_PATH="coverage/battleship$App.ic" NAME="App Coverage Results" MODIFIED="1707270094728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707272093807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707304022909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
   </component>

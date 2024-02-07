@@ -9,11 +9,6 @@ import java.util.HashSet;
  */
 public class BattleshipShip<T> extends BasicShip<T> {
     /**
-     * The name of the ship.
-     */
-    final static String name = "Battleship";
-
-    /**
      * Constructor for making a BattleshipShip from its coordinates and a {@link ShipDisplayInfo}
      * for both the ship and the enemy.
      *
@@ -77,6 +72,6 @@ public class BattleshipShip<T> extends BasicShip<T> {
      */
     @Override
     public String getName() {
-        return name;
+        return "Battleship";
     }
 }
