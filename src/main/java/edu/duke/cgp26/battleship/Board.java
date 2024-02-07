@@ -1,5 +1,7 @@
 package edu.duke.cgp26.battleship;
 
+import java.util.HashMap;
+
 /**
  * A representation of a generic game board.
  *
@@ -52,6 +54,14 @@ public interface Board<T> {
      * @return the ship that was hit, or null if no ship was hit.
      */
     Ship<T> fireAt(Coordinate c);
+
+    /**
+     * Perform a sonar scan at a given coordinate.
+     *
+     * @param c the coordinate to check.
+     * @return a map from the representation of ships to the number of said ships.
+     */
+    HashMap<String, Integer> sonarScan(Coordinate c);
 
     /**
      * Check if the game has been lost.
