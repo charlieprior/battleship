@@ -7,14 +7,25 @@ import java.util.HashSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RectangleShipTest {
+    private char get_placement(int width, int height) {
+        char placement;
+        if (width <= height) {
+            placement = 'V';
+        } else {
+            placement = 'H';
+        }
+        return placement;
+    }
 
     private void test_makeCoords_helper(Coordinate c1, int width, int height, HashSet<Coordinate> expected) {
-        HashSet<Coordinate> coords = RectangleShip.makeCoords(c1, width, height);
+        char placement = get_placement(width, height);
+        HashSet<Coordinate> coords = RectangleShip.makeCoords(new Placement(c1, placement), width, height);
         assertIterableEquals(expected, coords);
     }
 
     private void test_constructor_helper(Coordinate c1, int width, int height, HashSet<Coordinate> expected) {
-        RectangleShip<Character> rs = new RectangleShip<>("submarine", c1, width, height, 's', '*');
+        char placement = get_placement(width, height);
+        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Placement(c1, placement), width, height, 's', '*');
         for (Coordinate c : expected) {
             assertTrue(rs.occupiesCoordinates(c));
         }
@@ -59,7 +70,7 @@ class RectangleShipTest {
 
     @Test
     public void test_recordWasHit() {
-        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Coordinate(1, 2), 1, 3, 's', '*');
+        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Placement(new Coordinate(1, 2), 'V'), 1, 3, 's', '*');
         rs.recordHitAt(new Coordinate(1, 2));
         assertTrue(rs.wasHitAt(new Coordinate(1, 2)));
 
@@ -72,7 +83,7 @@ class RectangleShipTest {
 
     @Test
     public void test_isSunk() {
-        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Coordinate(1, 2), 1, 3, 's', '*');
+        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Placement(new Coordinate(1, 2), 'V'), 1, 3, 's', '*');
         assertFalse(rs.isSunk());
         rs.recordHitAt(new Coordinate(1, 2));
         assertFalse(rs.isSunk());
@@ -84,7 +95,7 @@ class RectangleShipTest {
 
     @Test
     public void test_getDisplayInfo() {
-        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Coordinate(1, 2), 1, 3, 's', '*');
+        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Placement(new Coordinate(1, 2), 'V'), 1, 3, 's', '*');
         assertEquals('s', rs.getDisplayInfoAt(new Coordinate(1, 2), true));
         assertNull(rs.getDisplayInfoAt(new Coordinate(1, 2), false));
         rs.recordHitAt(new Coordinate(1, 2));
@@ -95,7 +106,7 @@ class RectangleShipTest {
 
     @Test
     public void test_getCoordinates() {
-        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Coordinate(1, 2), 1, 3, 's', '*');
+        RectangleShip<Character> rs = new RectangleShip<>("submarine", new Placement(new Coordinate(1, 2), 'V'), 1, 3, 's', '*');
         HashSet<Coordinate> coords = new HashSet<>();
         coords.add(new Coordinate(1, 2));
         coords.add(new Coordinate(2, 2));

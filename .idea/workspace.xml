@@ -7,11 +7,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Changed some V1ShipFactory tests to V2ShipFactory tests in TextPlayerTest">
+    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Changes to ship design complete.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/V2ShipFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/V2ShipFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BasicShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BasicShip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleshipShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleshipShip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/CarrierShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/CarrierShip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/RectangleShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/RectangleShip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Ship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/V1ShipFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/V1ShipFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/RectangleShipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/RectangleShipTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +195,7 @@
       <workItem from="1707150975617" duration="10660000" />
       <workItem from="1707245478829" duration="1622000" />
       <workItem from="1707249740441" duration="84000" />
-      <workItem from="1707254276756" duration="9510000" />
+      <workItem from="1707254276756" duration="11994000" />
     </task>
     <task id="LOCAL-00001" summary="Task 19">
       <option name="closed" value="true" />
@@ -281,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707307121741</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Changes to ship design complete.">
+      <option name="closed" value="true" />
+      <created>1707318282538</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1707318282538</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,7 +323,8 @@
     <MESSAGE value="Added V2ShipFactory." />
     <MESSAGE value="Added testing for V2ShipFactory in TextPlayerTest and InBoundsRuleCheckerTest." />
     <MESSAGE value="Changed some V1ShipFactory tests to V2ShipFactory tests in TextPlayerTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed some V1ShipFactory tests to V2ShipFactory tests in TextPlayerTest" />
+    <MESSAGE value="Changes to ship design complete." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to ship design complete." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -322,7 +335,7 @@
     <SUITE FILE_PATH="coverage/battleship$App.ic" NAME="App Coverage Results" MODIFIED="1707306141371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707318237164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707324634817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
   </component>

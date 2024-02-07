@@ -24,9 +24,9 @@ public class RectangleShip<T> extends BasicShip<T> {
      * @param displayInfo      the ShipDisplayInfo of the ship.
      * @param enemyDisplayInfo the ShipDisplayInfo of the ship from an enemy perspective.
      */
-    public RectangleShip(String name, Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> displayInfo,
+    public RectangleShip(String name, Placement upperLeft, int width, int height, ShipDisplayInfo<T> displayInfo,
                          ShipDisplayInfo<T> enemyDisplayInfo) {
-        super(makeCoords(upperLeft, width, height), displayInfo, enemyDisplayInfo);
+        super(upperLeft, makeCoords(upperLeft, width, height), displayInfo, enemyDisplayInfo);
         this.name = name;
     }
 
@@ -40,7 +40,7 @@ public class RectangleShip<T> extends BasicShip<T> {
      * @param data      the representation to display when the ship is not hit.
      * @param onHit     the representation to display when the ship is hit.
      */
-    public RectangleShip(String name, Coordinate upperLeft, int width, int height, T data, T onHit) {
+    public RectangleShip(String name, Placement upperLeft, int width, int height, T data, T onHit) {
         this(name, upperLeft, width, height, new SimpleShipDisplayInfo<>(data, onHit),
                 new SimpleShipDisplayInfo<>(null, data));
     }
@@ -53,7 +53,7 @@ public class RectangleShip<T> extends BasicShip<T> {
      * @param onHit     the representation to display when the ship is hit.
      */
     public RectangleShip(Coordinate upperLeft, T data, T onHit) {
-        this("TestShip", upperLeft, 1, 1, data, onHit);
+        this("TestShip", new Placement(upperLeft, 'V'), 1, 1, data, onHit);
     }
 
     /**
@@ -64,11 +64,11 @@ public class RectangleShip<T> extends BasicShip<T> {
      * @param height    the ship's height.
      * @return the set of coordinates of the ship.
      */
-    static HashSet<Coordinate> makeCoords(Coordinate upperLeft, int width, int height) {
+    static HashSet<Coordinate> makeCoords(Placement upperLeft, int width, int height) {
         HashSet<Coordinate> res = new HashSet<>();
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
-                res.add(new Coordinate(row + upperLeft.getRow(), col + upperLeft.getColumn()));
+                res.add(new Coordinate(row + upperLeft.getWhere().getRow(), col + upperLeft.getWhere().getColumn()));
             }
         }
 

@@ -21,15 +21,21 @@ public abstract class BasicShip<T> implements Ship<T> {
      * True if hit, false otherwise.
      */
     protected HashMap<Coordinate, Boolean> myPieces;
+    /**
+     * The {@link Placement} of the ship.
+     */
+    protected Placement myPlacement;
 
     /**
      * Construct a BasicShip given an Iterable of Coordinates.
      *
+     * @param p                the Placement of the ship.
      * @param where            the Coordinates of the ship.
      * @param myDisplayInfo    the ShipDisplayInfo of the ship.
      * @param enemyDisplayInfo the ShipDisplayInfo of the ship from an enemy perspective.
      */
-    public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> myDisplayInfo, ShipDisplayInfo<T> enemyDisplayInfo) {
+    public BasicShip(Placement p, Iterable<Coordinate> where, ShipDisplayInfo<T> myDisplayInfo, ShipDisplayInfo<T> enemyDisplayInfo) {
+        this.myPlacement = p;
         this.myPieces = new HashMap<>();
         this.myDisplayInfo = myDisplayInfo;
         this.enemyDisplayInfo = enemyDisplayInfo;

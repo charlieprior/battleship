@@ -17,7 +17,7 @@ public class BattleshipShip<T> extends BasicShip<T> {
      * @param enemyDisplayInfo the ShipDisplayInfo of the ship from an enemy perspective.
      */
     public BattleshipShip(Placement upperLeft, ShipDisplayInfo<T> displayInfo, ShipDisplayInfo<T> enemyDisplayInfo) {
-        super(makeCoords(upperLeft), displayInfo, enemyDisplayInfo);
+        super(upperLeft, makeCoords(upperLeft), displayInfo, enemyDisplayInfo);
     }
 
     /**

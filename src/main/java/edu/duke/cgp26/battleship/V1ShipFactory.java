@@ -27,7 +27,7 @@ public class V1ShipFactory implements AbstractShipFactory<Character> {
         } else {
             throw new IllegalArgumentException("That placement is invalid: it does not have the correct format.\n");
         }
-        return new RectangleShip<>(name, where.getWhere(), width, height, letter, '*');
+        return new RectangleShip<>(name, where, width, height, letter, '*');
     }
 
     /**
