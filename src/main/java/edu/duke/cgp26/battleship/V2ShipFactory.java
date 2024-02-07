@@ -1,5 +1,8 @@
 package edu.duke.cgp26.battleship;
 
+/**
+ * This class represents a factory for creating ships in Version 2 of the battleship game.
+ */
 public class V2ShipFactory extends V1ShipFactory {
     /**
      * Make a battleship.

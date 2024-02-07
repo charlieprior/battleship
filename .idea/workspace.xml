@@ -7,11 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Added testing for V2ShipFactory in TextPlayerTest and InBoundsRuleCheckerTest.">
+    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Changed some V1ShipFactory tests to V2ShipFactory tests in TextPlayerTest">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/TextPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/TextPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/TextPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/TextPlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/V2ShipFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/V2ShipFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/output.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +191,7 @@
       <workItem from="1707150975617" duration="10660000" />
       <workItem from="1707245478829" duration="1622000" />
       <workItem from="1707249740441" duration="84000" />
-      <workItem from="1707254276756" duration="8446000" />
+      <workItem from="1707254276756" duration="9510000" />
     </task>
     <task id="LOCAL-00001" summary="Task 19">
       <option name="closed" value="true" />
@@ -273,7 +273,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707305487696</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Changed some V1ShipFactory tests to V2ShipFactory tests in TextPlayerTest">
+      <option name="closed" value="true" />
+      <created>1707307121741</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1707307121741</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,7 +310,8 @@
     <MESSAGE value="Added CarrierShip." />
     <MESSAGE value="Added V2ShipFactory." />
     <MESSAGE value="Added testing for V2ShipFactory in TextPlayerTest and InBoundsRuleCheckerTest." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added testing for V2ShipFactory in TextPlayerTest and InBoundsRuleCheckerTest." />
+    <MESSAGE value="Changed some V1ShipFactory tests to V2ShipFactory tests in TextPlayerTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed some V1ShipFactory tests to V2ShipFactory tests in TextPlayerTest" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -313,7 +322,7 @@
     <SUITE FILE_PATH="coverage/battleship$App.ic" NAME="App Coverage Results" MODIFIED="1707306141371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707307020774" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707318237164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
   </component>
