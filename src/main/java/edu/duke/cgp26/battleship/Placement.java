@@ -51,7 +51,8 @@ public class Placement {
      * @param placement the placement to check.
      */
     private void checkValidPlacement(char placement) {
-        if (placement != 'V' && placement != 'H') {
+        if (placement != 'V' && placement != 'H'
+                && placement != 'U' && placement != 'D' && placement != 'L' && placement != 'R') {
             throw new IllegalArgumentException("That placement is invalid: it does not have the correct format.\n");
         }
     }

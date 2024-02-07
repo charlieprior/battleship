@@ -20,12 +20,13 @@ public class V1ShipFactory implements AbstractShipFactory<Character> {
         if (where.getPlacement() == 'V') {
             width = w;
             height = h;
-        } else {
-            // Placement is H, rotate the ship
+        } else if (where.getPlacement() == 'H') {
+            // Rotate the ship
             width = h;
             height = w;
+        } else {
+            throw new IllegalArgumentException("That placement is invalid: it does not have the correct format.\n");
         }
-        // TODO: Could add checking here to make sure placement is valid for type of ship (or in V2)
         return new RectangleShip<Character>(name, where.getWhere(), width, height, letter, '*');
     }
 

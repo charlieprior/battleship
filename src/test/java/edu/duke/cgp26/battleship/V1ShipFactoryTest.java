@@ -48,6 +48,8 @@ class V1ShipFactoryTest {
                 new Coordinate("I5"));
 
         assertThrows(IllegalArgumentException.class, () -> factory.makeBattleship(new Placement("G5J")));
+        assertThrows(IllegalArgumentException.class, () -> factory.makeCarrier(new Placement("G5U")));
+
     }
 
     @Test

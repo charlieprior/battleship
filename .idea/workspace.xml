@@ -7,16 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Task 21">
+    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Task 22 &amp; Goal 5 &amp; Version 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleShipBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleShipBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/TextPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/TextPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/AppTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/BattleShipBoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/BattleShipBoardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/TextPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/TextPlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/output.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +47,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -120,6 +113,9 @@
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="edu.duke.cgp26.battleship" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="edu.duke.cgp26.battleship" />
@@ -190,7 +186,10 @@
       <workItem from="1706894174606" duration="6921000" />
       <workItem from="1706978972756" duration="19085000" />
       <workItem from="1707066253119" duration="9151000" />
-      <workItem from="1707150975617" duration="9439000" />
+      <workItem from="1707150975617" duration="10660000" />
+      <workItem from="1707245478829" duration="1622000" />
+      <workItem from="1707249740441" duration="84000" />
+      <workItem from="1707254276756" duration="1590000" />
     </task>
     <task id="LOCAL-00001" summary="Task 19">
       <option name="closed" value="true" />
@@ -216,7 +215,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707158484657</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Task 22 &amp; Goal 5 &amp; Version 1">
+      <option name="closed" value="true" />
+      <created>1707165202974</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1707165202974</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,7 +245,8 @@
     <MESSAGE value="Task 19" />
     <MESSAGE value="Task 20" />
     <MESSAGE value="Task 21" />
-    <option name="LAST_COMMIT_MESSAGE" value="Task 21" />
+    <MESSAGE value="Task 22 &amp; Goal 5 &amp; Version 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Task 22 &amp; Goal 5 &amp; Version 1" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -249,7 +257,7 @@
     <SUITE FILE_PATH="coverage/battleship$App.ic" NAME="App Coverage Results" MODIFIED="1707161541549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707164874487" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707165494568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
   </component>

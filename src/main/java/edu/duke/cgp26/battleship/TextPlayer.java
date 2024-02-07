@@ -196,7 +196,7 @@ public class TextPlayer {
                     // We've already looked at this coordinate
                     print("That coordinate has already been selected, please choose another.\n");
                     continue;
-                }
+                } // TODO: this will have to change for version 2 goal 2.
                 Ship<Character> s = enemyBoard.fireAt(c);
                 if (s == null) {
                     print("You missed!\n");
