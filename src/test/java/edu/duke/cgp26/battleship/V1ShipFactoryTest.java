@@ -49,7 +49,6 @@ class V1ShipFactoryTest {
 
         assertThrows(IllegalArgumentException.class, () -> factory.makeBattleship(new Placement("G5J")));
         assertThrows(IllegalArgumentException.class, () -> factory.makeCarrier(new Placement("G5U")));
-
     }
 
     @Test

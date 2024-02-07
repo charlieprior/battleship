@@ -2,6 +2,11 @@ package edu.duke.cgp26.battleship;
 
 import java.util.HashSet;
 
+/**
+ * A class representing a Z-shaped Carrier.
+ *
+ * @param <T> the representation type.
+ */
 public class CarrierShip<T> extends BasicShip<T> {
     /**
      * Constructor for making a BattleshipShip from its coordinates and a {@link ShipDisplayInfo}
