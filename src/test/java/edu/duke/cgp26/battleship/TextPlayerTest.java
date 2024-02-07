@@ -198,6 +198,28 @@ class TextPlayerTest {
     }
 
     @Test
+    void test_do_one_placement2() throws IOException {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        TextPlayer player = createTextPlayer(5, 5, "A1D", bytes);
+        AbstractShipFactory<Character> factory = new V2ShipFactory();
+
+        player.doOnePlacement("Battleship", factory::makeBattleship);
+        assertEquals("---------------------------------------------------------------------------\n" +
+                "Player A where do you want to place a Battleship?\n" +
+                "---------------------------------------------------------------------------\n" +
+                "---------------------------------------------------------------------------\n" +
+                "  0|1|2|3|4\n" +
+                "A  |b|b|b|  A\n" +
+                "B  | |b| |  B\n" +
+                "C  | | | |  C\n" +
+                "D  | | | |  D\n" +
+                "E  | | | |  E\n" +
+                "  0|1|2|3|4\n" +
+                "---------------------------------------------------------------------------\n", bytes.toString());
+        bytes.reset();
+    }
+
+    @Test
     public void test_doPlacementPhase() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         TextPlayer player = createTextPlayer(10, 20, "A0H\n" +

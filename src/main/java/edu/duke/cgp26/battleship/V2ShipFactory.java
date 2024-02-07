@@ -9,7 +9,7 @@ public class V2ShipFactory extends V1ShipFactory {
      */
     @Override
     public Ship<Character> makeBattleship(Placement where) {
-        return new BattleshipShip<Character>(where, 'b', '*');
+        return new BattleshipShip<>(where, 'b', '*');
     }
 
     /**
