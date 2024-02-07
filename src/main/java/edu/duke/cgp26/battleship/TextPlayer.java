@@ -164,16 +164,23 @@ public class TextPlayer {
      */
     public void doPlacementPhase() throws IOException {
         print(view.displayMyOwnBoard());
-        print("Player " + name + ": you are going to place the following ships (which are all\n" +
-                "rectangular). For each ship, type the coordinate of the upper left\n" +
+        print("Player " + name + ": you are going to place the following ships.\n" +
+                "There are two types of rectangular ships:\n" +
+                "- 2 rectangular \"Submarines\" ships that are 1x2 \n" +
+                "- 3 rectangular \"Destroyers\" that are 1x3\n" +
+                "For each ship, type the coordinate of the upper left\n" +
                 "side of the ship, followed by either H (for horizontal) or V (for\n" +
                 "vertical).  For example M4H would place a ship horizontally starting\n" +
-                "at M4 and going to the right.  You have\n" +
+                "at M4 and going to the right. \n" +
                 "\n" +
-                "2 \"Submarines\" ships that are 1x2 \n" +
-                "3 \"Destroyers\" that are 1x3\n" +
-                "3 \"Battleships\" that are 1x4\n" +
-                "2 \"Carriers\" that are 1x6\n");
+                "There are also two types of special ships:\n" +
+                "- 3 \"Battleships\" that are 4 squares arranged in a T formation\n" +
+                "- 2 \"Carriers\" that are 7 squares arranged in a Z formation\n" +
+                "For each ship, type the coordinate of the upper left\n" +
+                "side of the ship (which may not be included in the ship itself),\n" +
+                "followed by either U (for up), D (for down), L (for left) or R (for right).\n" +
+                "For example M4D would place a ship occupying the squares\n" +
+                "M4, M5, M6 and N5.\n");
         for (String s : shipsToPlace) {
             doOnePlacement(s, shipCreationFns.get(s));
         }

@@ -38,7 +38,7 @@ public class App {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         Board<Character> b1 = new BattleShipBoard<>(10, 20, 'X');
         Board<Character> b2 = new BattleShipBoard<>(10, 20, 'X');
-        V1ShipFactory factory = new V1ShipFactory();
+        V1ShipFactory factory = new V2ShipFactory();
 
         TextPlayer player1 = new TextPlayer("A", b1, input, System.out, factory);
         TextPlayer player2 = new TextPlayer("B", b2, input, System.out, factory);

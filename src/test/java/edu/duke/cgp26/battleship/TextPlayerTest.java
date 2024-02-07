@@ -12,7 +12,7 @@ class TextPlayerTest {
         BufferedReader input = new BufferedReader(new StringReader(inputData));
         PrintStream output = new PrintStream(bytes, true);
         Board<Character> board = new BattleShipBoard<>(w, h, 'X');
-        V1ShipFactory shipFactory = new V1ShipFactory();
+        V2ShipFactory shipFactory = new V2ShipFactory();
         return new TextPlayer("A", board, input, output, shipFactory);
     }
 
@@ -227,11 +227,11 @@ class TextPlayerTest {
                 "B3V\n" +
                 "O5V\n" +
                 "G6H\n" +
-                "m0h\n" +
-                "j9v\n" +
-                "r3h\n" +
-                "s0h\n" +
-                "f3v", bytes);
+                "m0u\n" +
+                "j8r\n" +
+                "r3u\n" +
+                "h0r\n" +
+                "e3l", bytes);
         player.doPlacementPhase();
         assertEquals("---------------------------------------------------------------------------\n" +
                 "  0|1|2|3|4|5|6|7|8|9\n" +
@@ -258,16 +258,23 @@ class TextPlayerTest {
                 "  0|1|2|3|4|5|6|7|8|9\n" +
                 "---------------------------------------------------------------------------\n" +
                 "---------------------------------------------------------------------------\n" +
-                "Player A: you are going to place the following ships (which are all\n" +
-                "rectangular). For each ship, type the coordinate of the upper left\n" +
+                "Player A: you are going to place the following ships.\n" +
+                "There are two types of rectangular ships:\n" +
+                "- 2 rectangular \"Submarines\" ships that are 1x2 \n" +
+                "- 3 rectangular \"Destroyers\" that are 1x3\n" +
+                "For each ship, type the coordinate of the upper left\n" +
                 "side of the ship, followed by either H (for horizontal) or V (for\n" +
                 "vertical).  For example M4H would place a ship horizontally starting\n" +
-                "at M4 and going to the right.  You have\n" +
+                "at M4 and going to the right. \n" +
                 "\n" +
-                "2 \"Submarines\" ships that are 1x2 \n" +
-                "3 \"Destroyers\" that are 1x3\n" +
-                "3 \"Battleships\" that are 1x4\n" +
-                "2 \"Carriers\" that are 1x6\n" +
+                "There are also two types of special ships:\n" +
+                "- 3 \"Battleships\" that are 4 squares arranged in a T formation\n" +
+                "- 2 \"Carriers\" that are 7 squares arranged in a Z formation\n" +
+                "For each ship, type the coordinate of the upper left\n" +
+                "side of the ship (which may not be included in the ship itself),\n" +
+                "followed by either U (for up), D (for down), L (for left) or R (for right).\n" +
+                "For example M4D would place a ship occupying the squares\n" +
+                "M4, M5, M6 and N5.\n" +
                 "---------------------------------------------------------------------------\n" +
                 "---------------------------------------------------------------------------\n" +
                 "Player A where do you want to place a Submarine?\n" +
@@ -421,8 +428,8 @@ class TextPlayerTest {
                 "J  | | | | | | | | |  J\n" +
                 "K  | | | | | | | | |  K\n" +
                 "L  | | | | | | | | |  L\n" +
-                "M b|b|b|b| | | | | |  M\n" +
-                "N  | | | | | | | | |  N\n" +
+                "M  |b| | | | | | | |  M\n" +
+                "N b|b|b| | | | | | |  N\n" +
                 "O  | | | | |d| | | |  O\n" +
                 "P  | | | | |d| | | |  P\n" +
                 "Q  | | | | |d| | | |  Q\n" +
@@ -445,11 +452,11 @@ class TextPlayerTest {
                 "G  | | | | | |d|d|d|  G\n" +
                 "H  | | | | | | | | |  H\n" +
                 "I  | | | | | | | | |  I\n" +
-                "J  | | | | | | | | |b J\n" +
-                "K  | | | | | | | | |b K\n" +
-                "L  | | | | | | | | |b L\n" +
-                "M b|b|b|b| | | | | |b M\n" +
-                "N  | | | | | | | | |  N\n" +
+                "J  | | | | | | | |b|  J\n" +
+                "K  | | | | | | | |b|b K\n" +
+                "L  | | | | | | | |b|  L\n" +
+                "M  |b| | | | | | | |  M\n" +
+                "N b|b|b| | | | | | |  N\n" +
                 "O  | | | | |d| | | |  O\n" +
                 "P  | | | | |d| | | |  P\n" +
                 "Q  | | | | |d| | | |  Q\n" +
@@ -472,16 +479,16 @@ class TextPlayerTest {
                 "G  | | | | | |d|d|d|  G\n" +
                 "H  | | | | | | | | |  H\n" +
                 "I  | | | | | | | | |  I\n" +
-                "J  | | | | | | | | |b J\n" +
-                "K  | | | | | | | | |b K\n" +
-                "L  | | | | | | | | |b L\n" +
-                "M b|b|b|b| | | | | |b M\n" +
-                "N  | | | | | | | | |  N\n" +
+                "J  | | | | | | | |b|  J\n" +
+                "K  | | | | | | | |b|b K\n" +
+                "L  | | | | | | | |b|  L\n" +
+                "M  |b| | | | | | | |  M\n" +
+                "N b|b|b| | | | | | |  N\n" +
                 "O  | | | | |d| | | |  O\n" +
                 "P  | | | | |d| | | |  P\n" +
                 "Q  | | | | |d| | | |  Q\n" +
-                "R  | | |b|b|b|b| | |  R\n" +
-                "S  | | | | | | | | |  S\n" +
+                "R  | | | |b| | | | |  R\n" +
+                "S  | | |b|b|b| | | |  S\n" +
                 "T  | | | | | | | | |  T\n" +
                 "  0|1|2|3|4|5|6|7|8|9\n" +
                 "---------------------------------------------------------------------------\n" +
@@ -497,18 +504,18 @@ class TextPlayerTest {
                 "E  | | | | | | | | |  E\n" +
                 "F  | | | | | | | | |  F\n" +
                 "G  | | | | | |d|d|d|  G\n" +
-                "H  | | | | | | | | |  H\n" +
-                "I  | | | | | | | | |  I\n" +
-                "J  | | | | | | | | |b J\n" +
-                "K  | | | | | | | | |b K\n" +
-                "L  | | | | | | | | |b L\n" +
-                "M b|b|b|b| | | | | |b M\n" +
-                "N  | | | | | | | | |  N\n" +
+                "H  |c|c|c|c| | | | |  H\n" +
+                "I c|c|c| | | | | | |  I\n" +
+                "J  | | | | | | | |b|  J\n" +
+                "K  | | | | | | | |b|b K\n" +
+                "L  | | | | | | | |b|  L\n" +
+                "M  |b| | | | | | | |  M\n" +
+                "N b|b|b| | | | | | |  N\n" +
                 "O  | | | | |d| | | |  O\n" +
                 "P  | | | | |d| | | |  P\n" +
                 "Q  | | | | |d| | | |  Q\n" +
-                "R  | | |b|b|b|b| | |  R\n" +
-                "S c|c|c|c|c|c| | | |  S\n" +
+                "R  | | | |b| | | | |  R\n" +
+                "S  | | |b|b|b| | | |  S\n" +
                 "T  | | | | | | | | |  T\n" +
                 "  0|1|2|3|4|5|6|7|8|9\n" +
                 "---------------------------------------------------------------------------\n" +
@@ -521,21 +528,21 @@ class TextPlayerTest {
                 "B  | | |d| | | | | |  B\n" +
                 "C s| | |d| | | | | |  C\n" +
                 "D s| | |d| | | | | |  D\n" +
-                "E  | | | | | | | | |  E\n" +
-                "F  | | |c| | | | | |  F\n" +
-                "G  | | |c| | |d|d|d|  G\n" +
-                "H  | | |c| | | | | |  H\n" +
-                "I  | | |c| | | | | |  I\n" +
-                "J  | | |c| | | | | |b J\n" +
-                "K  | | |c| | | | | |b K\n" +
-                "L  | | | | | | | | |b L\n" +
-                "M b|b|b|b| | | | | |b M\n" +
-                "N  | | | | | | | | |  N\n" +
+                "E  | | | | |c|c|c| |  E\n" +
+                "F  | | |c|c|c|c| | |  F\n" +
+                "G  | | | | | |d|d|d|  G\n" +
+                "H  |c|c|c|c| | | | |  H\n" +
+                "I c|c|c| | | | | | |  I\n" +
+                "J  | | | | | | | |b|  J\n" +
+                "K  | | | | | | | |b|b K\n" +
+                "L  | | | | | | | |b|  L\n" +
+                "M  |b| | | | | | | |  M\n" +
+                "N b|b|b| | | | | | |  N\n" +
                 "O  | | | | |d| | | |  O\n" +
                 "P  | | | | |d| | | |  P\n" +
                 "Q  | | | | |d| | | |  Q\n" +
-                "R  | | |b|b|b|b| | |  R\n" +
-                "S c|c|c|c|c|c| | | |  S\n" +
+                "R  | | | |b| | | | |  R\n" +
+                "S  | | |b|b|b| | | |  S\n" +
                 "T  | | | | | | | | |  T\n" +
                 "  0|1|2|3|4|5|6|7|8|9\n" +
                 "---------------------------------------------------------------------------\n", bytes.toString());
@@ -545,9 +552,9 @@ class TextPlayerTest {
     public void test_playOneTurn() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         TextPlayer player1 = createTextPlayer(10, 20, "", bytes);
-        TextPlayer player2 = createTextPlayer(10, 20, "A0\nZ9\nAA\n6]\nA1\nB0\nC0\nD0\nA0\nA2", bytes);
-        AbstractShipFactory<Character> factory = new V1ShipFactory();
-        Ship<Character> s1 = factory.makeBattleship(new Placement("A0V"));
+        TextPlayer player2 = createTextPlayer(10, 20, "A0\nZ9\nAA\n6]\nA1\nA2\nB1\nD0\nA0\nA4", bytes);
+        AbstractShipFactory<Character> factory = new V2ShipFactory();
+        Ship<Character> s1 = factory.makeBattleship(new Placement("A0D"));
         player1.theBoard.tryAddShip(s1);
         player2.playOneTurn(player1.theBoard, player1.view, player1.name);
         player2.playOneTurn(player1.theBoard, player1.view, player1.name);
@@ -633,12 +640,12 @@ class TextPlayerTest {
                 "Player A enter the coordinate for your attack:\n" +
                 "---------------------------------------------------------------------------\n" +
                 "---------------------------------------------------------------------------\n" +
-                "You missed!\n" +
+                "You hit a Battleship!\n" +
                 "---------------------------------------------------------------------------\n" +
                 "---------------------------------------------------------------------------\n" +
                 "     Your ocean                             Player A's ocean\n" +
                 "  0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9\n" +
-                "A  | | | | | | | | |  A                A b|X| | | | | | | |  A\n" +
+                "A  | | | | | | | | |  A                A b|b| | | | | | | |  A\n" +
                 "B  | | | | | | | | |  B                B  | | | | | | | | |  B\n" +
                 "C  | | | | | | | | |  C                C  | | | | | | | | |  C\n" +
                 "D  | | | | | | | | |  D                D  | | | | | | | | |  D\n" +
@@ -669,40 +676,9 @@ class TextPlayerTest {
                 "---------------------------------------------------------------------------\n" +
                 "     Your ocean                             Player A's ocean\n" +
                 "  0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9\n" +
-                "A  | | | | | | | | |  A                A b|X| | | | | | | |  A\n" +
-                "B  | | | | | | | | |  B                B b| | | | | | | | |  B\n" +
+                "A  | | | | | | | | |  A                A b|b|b| | | | | | |  A\n" +
+                "B  | | | | | | | | |  B                B  | | | | | | | | |  B\n" +
                 "C  | | | | | | | | |  C                C  | | | | | | | | |  C\n" +
-                "D  | | | | | | | | |  D                D  | | | | | | | | |  D\n" +
-                "E  | | | | | | | | |  E                E  | | | | | | | | |  E\n" +
-                "F  | | | | | | | | |  F                F  | | | | | | | | |  F\n" +
-                "G  | | | | | | | | |  G                G  | | | | | | | | |  G\n" +
-                "H  | | | | | | | | |  H                H  | | | | | | | | |  H\n" +
-                "I  | | | | | | | | |  I                I  | | | | | | | | |  I\n" +
-                "J  | | | | | | | | |  J                J  | | | | | | | | |  J\n" +
-                "K  | | | | | | | | |  K                K  | | | | | | | | |  K\n" +
-                "L  | | | | | | | | |  L                L  | | | | | | | | |  L\n" +
-                "M  | | | | | | | | |  M                M  | | | | | | | | |  M\n" +
-                "N  | | | | | | | | |  N                N  | | | | | | | | |  N\n" +
-                "O  | | | | | | | | |  O                O  | | | | | | | | |  O\n" +
-                "P  | | | | | | | | |  P                P  | | | | | | | | |  P\n" +
-                "Q  | | | | | | | | |  Q                Q  | | | | | | | | |  Q\n" +
-                "R  | | | | | | | | |  R                R  | | | | | | | | |  R\n" +
-                "S  | | | | | | | | |  S                S  | | | | | | | | |  S\n" +
-                "T  | | | | | | | | |  T                T  | | | | | | | | |  T\n" +
-                "  0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9\n" +
-                "---------------------------------------------------------------------------\n" +
-                "---------------------------------------------------------------------------\n" +
-                "Player A enter the coordinate for your attack:\n" +
-                "---------------------------------------------------------------------------\n" +
-                "---------------------------------------------------------------------------\n" +
-                "You hit a Battleship!\n" +
-                "---------------------------------------------------------------------------\n" +
-                "---------------------------------------------------------------------------\n" +
-                "     Your ocean                             Player A's ocean\n" +
-                "  0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9\n" +
-                "A  | | | | | | | | |  A                A b|X| | | | | | | |  A\n" +
-                "B  | | | | | | | | |  B                B b| | | | | | | | |  B\n" +
-                "C  | | | | | | | | |  C                C b| | | | | | | | |  C\n" +
                 "D  | | | | | | | | |  D                D  | | | | | | | | |  D\n" +
                 "E  | | | | | | | | |  E                E  | | | | | | | | |  E\n" +
                 "F  | | | | | | | | |  F                F  | | | | | | | | |  F\n" +
@@ -731,10 +707,41 @@ class TextPlayerTest {
                 "---------------------------------------------------------------------------\n" +
                 "     Your ocean                             Player A's ocean\n" +
                 "  0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9\n" +
-                "A  | | | | | | | | |  A                A b|X| | | | | | | |  A\n" +
-                "B  | | | | | | | | |  B                B b| | | | | | | | |  B\n" +
-                "C  | | | | | | | | |  C                C b| | | | | | | | |  C\n" +
-                "D  | | | | | | | | |  D                D b| | | | | | | | |  D\n" +
+                "A  | | | | | | | | |  A                A b|b|b| | | | | | |  A\n" +
+                "B  | | | | | | | | |  B                B  |b| | | | | | | |  B\n" +
+                "C  | | | | | | | | |  C                C  | | | | | | | | |  C\n" +
+                "D  | | | | | | | | |  D                D  | | | | | | | | |  D\n" +
+                "E  | | | | | | | | |  E                E  | | | | | | | | |  E\n" +
+                "F  | | | | | | | | |  F                F  | | | | | | | | |  F\n" +
+                "G  | | | | | | | | |  G                G  | | | | | | | | |  G\n" +
+                "H  | | | | | | | | |  H                H  | | | | | | | | |  H\n" +
+                "I  | | | | | | | | |  I                I  | | | | | | | | |  I\n" +
+                "J  | | | | | | | | |  J                J  | | | | | | | | |  J\n" +
+                "K  | | | | | | | | |  K                K  | | | | | | | | |  K\n" +
+                "L  | | | | | | | | |  L                L  | | | | | | | | |  L\n" +
+                "M  | | | | | | | | |  M                M  | | | | | | | | |  M\n" +
+                "N  | | | | | | | | |  N                N  | | | | | | | | |  N\n" +
+                "O  | | | | | | | | |  O                O  | | | | | | | | |  O\n" +
+                "P  | | | | | | | | |  P                P  | | | | | | | | |  P\n" +
+                "Q  | | | | | | | | |  Q                Q  | | | | | | | | |  Q\n" +
+                "R  | | | | | | | | |  R                R  | | | | | | | | |  R\n" +
+                "S  | | | | | | | | |  S                S  | | | | | | | | |  S\n" +
+                "T  | | | | | | | | |  T                T  | | | | | | | | |  T\n" +
+                "  0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9\n" +
+                "---------------------------------------------------------------------------\n" +
+                "---------------------------------------------------------------------------\n" +
+                "Player A enter the coordinate for your attack:\n" +
+                "---------------------------------------------------------------------------\n" +
+                "---------------------------------------------------------------------------\n" +
+                "You missed!\n" +
+                "---------------------------------------------------------------------------\n" +
+                "---------------------------------------------------------------------------\n" +
+                "     Your ocean                             Player A's ocean\n" +
+                "  0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9\n" +
+                "A  | | | | | | | | |  A                A b|b|b| | | | | | |  A\n" +
+                "B  | | | | | | | | |  B                B  |b| | | | | | | |  B\n" +
+                "C  | | | | | | | | |  C                C  | | | | | | | | |  C\n" +
+                "D  | | | | | | | | |  D                D X| | | | | | | | |  D\n" +
                 "E  | | | | | | | | |  E                E  | | | | | | | | |  E\n" +
                 "F  | | | | | | | | |  F                F  | | | | | | | | |  F\n" +
                 "G  | | | | | | | | |  G                G  | | | | | | | | |  G\n" +
