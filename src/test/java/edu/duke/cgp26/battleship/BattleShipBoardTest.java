@@ -193,7 +193,7 @@ class BattleShipBoardTest {
 
         coords.add(new Coordinate(-3, 0));
 
-        assertEquals(coords, b.sonarScanCoordinates(c)); // TODO: why doesn't assertIterableEquals work?
+        assertEquals(coords, b.sonarScanCoordinates(c));
     }
 
     @Test
@@ -202,12 +202,10 @@ class BattleShipBoardTest {
         Board<Character> b1 = new BattleShipBoard<>(10, 10, 'X');
         Ship<Character> s1 = factory.makeSubmarine(new Placement("A0V"));
         Ship<Character> s2 = factory.makeCarrier(new Placement("A1D"));
-        Ship<Character> s3 = factory.makeCarrier(new Placement("A3D"));
         b1.tryAddShip(s1);
         b1.tryAddShip(s2);
-        b1.tryAddShip(s3);
         HashMap<String, Integer> map = b1.sonarScan(new Coordinate("A1"));
-        assertEquals(1, map.get("Submarine"));
-        assertEquals(2, map.get("Carrier"));
+        assertEquals(2, map.get("Submarine"));
+        assertEquals(5, map.get("Carrier"));
     }
 }

@@ -7,11 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Changed some V1ShipFactory tests to V2ShipFactory tests in TextPlayerTest">
+    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Added sonar scan generation of coordinates and performing the scan.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleShipBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleShipBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/TextPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/TextPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/AppTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/BattleShipBoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/BattleShipBoardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/BattleshipShipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/BattleshipShipTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/CarrierShipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/CarrierShipTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/RectangleShipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/RectangleShipTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/TextPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/TextPlayerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +57,7 @@
         <option value="Interface" />
         <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -78,40 +84,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.App.executor": "Coverage",
-    "Gradle.AppTest.test_main.executor": "Coverage",
-    "Gradle.Build battleship.executor": "Run",
-    "Gradle.InBoundsRuleCheckerTest.test_rule.executor": "Debug",
-    "Gradle.MainTest.test_main.executor": "Run",
-    "Gradle.battleship [:App.main()].executor": "Run",
-    "Gradle.battleship [installDist].executor": "Run",
-    "Gradle.battleship [jar].executor": "Run",
-    "Gradle.battleship [tasks].executor": "Run",
-    "JUnit.All Tests.executor": "Coverage",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "code.cleanup.on.save": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "sonar",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "/Users/charlieprior/Dropbox/Projects/ECE651/Homeworks/HW2/battleship/src/main/java/edu/duke/cgp26/battleship/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.App.executor&quot;: &quot;Coverage&quot;,
+    &quot;Gradle.AppTest.test_main.executor&quot;: &quot;Coverage&quot;,
+    &quot;Gradle.Build battleship.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.InBoundsRuleCheckerTest.test_rule.executor&quot;: &quot;Debug&quot;,
+    &quot;Gradle.MainTest.test_main.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.TextPlayerTest.test_readMoveType.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.battleship [:App.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.battleship [installDist].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.battleship [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.battleship [tasks].executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All Tests.executor&quot;: &quot;Coverage&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;sonar&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/charlieprior/Dropbox/Projects/ECE651/Homeworks/HW2/battleship/src/main/java/edu/duke/cgp26/battleship/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -192,6 +199,8 @@
       <workItem from="1707245478829" duration="1622000" />
       <workItem from="1707249740441" duration="84000" />
       <workItem from="1707254276756" duration="9510000" />
+      <workItem from="1707840910042" duration="24000" />
+      <workItem from="1707840940483" duration="1920000" />
     </task>
     <task id="LOCAL-00001" summary="Task 19">
       <option name="closed" value="true" />
@@ -281,7 +290,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707307121741</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added sonar scan generation of coordinates and performing the scan.">
+      <option name="closed" value="true" />
+      <created>1707330403820</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1707330403820</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,7 +328,8 @@
     <MESSAGE value="Added V2ShipFactory." />
     <MESSAGE value="Added testing for V2ShipFactory in TextPlayerTest and InBoundsRuleCheckerTest." />
     <MESSAGE value="Changed some V1ShipFactory tests to V2ShipFactory tests in TextPlayerTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed some V1ShipFactory tests to V2ShipFactory tests in TextPlayerTest" />
+    <MESSAGE value="Added sonar scan generation of coordinates and performing the scan." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added sonar scan generation of coordinates and performing the scan." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -319,10 +337,10 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/battleship$AppTest_test_main.ic" NAME="AppTest.test_main Coverage Results" MODIFIED="1707018500711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/battleship$App.ic" NAME="App Coverage Results" MODIFIED="1707306141371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/battleship$App.ic" NAME="App Coverage Results" MODIFIED="1707339300467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707330177194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707842846639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
   </component>

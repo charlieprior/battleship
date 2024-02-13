@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CarrierShipTest {
     private void test_makeCoords_helper(Placement p1, HashSet<Coordinate> expected) {
         HashSet<Coordinate> coords = CarrierShip.makeCoords(p1);
-        assertIterableEquals(expected, coords);
+        assertEquals(expected, coords);
     }
 
     private void test_constructor_helper(Placement p1, HashSet<Coordinate> expected) {

@@ -210,7 +210,6 @@ public class BattleShipBoard<T> implements Board<T> {
                     Integer val = res.getOrDefault(s.getName(), 0);
                     val += 1;
                     res.put(s.getName(), val);
-                    break;
                 }
             }
         }
