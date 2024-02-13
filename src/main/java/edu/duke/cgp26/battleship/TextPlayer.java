@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.function.Function;
 
 /**
@@ -45,6 +46,8 @@ public class TextPlayer {
      * A map of ship names to functions that create ships.
      */
     final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
+    int scansRemaining;
+    int movesRemaining;
 
     /**
      * Create a TextPlayer.
@@ -64,6 +67,8 @@ public class TextPlayer {
         this.out = out;
         this.shipsToPlace = new ArrayList<>();
         this.shipCreationFns = new HashMap<>();
+        this.movesRemaining = 3;
+        this.scansRemaining = 3;
 
         setupShipCreationMap();
         setupShipCreationList();
@@ -114,6 +119,26 @@ public class TextPlayer {
             throw new EOFException("Unexpected end of file\n");
         }
         return new Coordinate(s);
+    }
+
+    /**
+     * Reads a move type and returns it.
+     *
+     * @param prompt the prompt to display.
+     * @return the move type.
+     * @throws IOException We will not handle this exception.
+     */
+    public char readMoveType(String prompt) throws IOException {
+        print(prompt);
+        String s = inputReader.readLine();
+        if (s == null) {
+            throw new EOFException("Unexpected end of file\n");
+        }
+        s = s.toUpperCase();
+        if (!s.equals("F") && !s.equals("M") && !s.equals("S")) {
+            throw new IllegalArgumentException("The move type must be one of F, M or S\n");
+        }
+        return s.charAt(0);
     }
 
     /**
@@ -198,12 +223,75 @@ public class TextPlayer {
         print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
         while (true) {
             try {
+                char moveType = readMoveType("Possible actions for Player " + name + ":\n" +
+                        "\n" +
+                        " F Fire at a square\n" +
+                        " M Move a ship to another square (" + movesRemaining + " remaining)\n" +
+                        " S Sonar scan (" + scansRemaining + " remaining)\n" +
+                        "\n" +
+                        "Player " + name + ", what would you like to do?\n");
+                if (moveType == 'F') {
+                    fireMove(enemyBoard);
+                    return;
+                } else if (moveType == 'S') {
+                    if (scansRemaining <= 0) {
+                        print("You have no sonar scans remaining.\n");
+                        continue;
+                    }
+                    sonarScan(enemyBoard);
+                    return;
+                } else if (moveType == 'M') {
+                    if (movesRemaining <= 0) {
+                        print("You have no moves remaining.\n");
+                        continue;
+                    }
+                    // Move a ship
+                    movesRemaining--; // TODO: implement moveShip and remove this
+                    return;
+                }
+            } catch (IllegalArgumentException e) {
+                print(e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Perform a sonar scan at a given coordinate.
+     *
+     * @param enemyBoard the enemy's board.
+     * @throws IOException We will not handle this exception.
+     */
+    public void sonarScan(Board<Character> enemyBoard) throws IOException {
+        while (true) {
+            try {
+                Coordinate c = readCoordinate("Player " + name + " enter the coordinate for your sonar scan:\n");
+                HashMap<String, Integer> scanResults = enemyBoard.sonarScan(c);
+                StringBuilder str = new StringBuilder();
+                HashSet<String> shipTypes = new HashSet<>(shipsToPlace);
+                for (String shipType : shipTypes) {
+                    Integer n = scanResults.getOrDefault(shipType, 0);
+                    str.append(shipType).append("s occupy ").append(n).append(" square");
+                    str.append(n != 1 ? "s\n" : "\n");
+                }
+                scansRemaining -= 1;
+                print(str.toString());
+                return;
+            } catch (IllegalArgumentException e) {
+                print(e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Fire a torpedo at the enemy's board.
+     *
+     * @param enemyBoard the enemy's board.
+     * @throws IOException We will not handle this exception.
+     */
+    public void fireMove(Board<Character> enemyBoard) throws IOException {
+        while (true) {
+            try {
                 Coordinate c = readCoordinate("Player " + name + " enter the coordinate for your attack:\n");
-                if (enemyBoard.whatIsAtForEnemy(c) != null) {
-                    // We've already looked at this coordinate
-                    print("That coordinate has already been selected, please choose another.\n");
-                    continue;
-                } // TODO: this will have to change for version 2 goal 2.
                 Ship<Character> s = enemyBoard.fireAt(c);
                 if (s == null) {
                     print("You missed!\n");

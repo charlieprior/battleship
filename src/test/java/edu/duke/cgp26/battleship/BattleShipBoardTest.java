@@ -2,6 +2,9 @@ package edu.duke.cgp26.battleship;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BattleShipBoardTest {
@@ -151,5 +154,58 @@ class BattleShipBoardTest {
         assertFalse(b1.checkIfLost());
         b1.fireAt(new Coordinate(5, 5));
         assertTrue(b1.checkIfLost());
+    }
+
+    @Test
+    public void test_sonarScanCoordinates() {
+        BattleShipBoard<Character> b = new BattleShipBoard<>(5, 5, '*');
+        Coordinate c = new Coordinate(0, 0);
+        HashSet<Coordinate> coords = new HashSet<>();
+        coords.add(new Coordinate(0, -3));
+        coords.add(new Coordinate(0, -2));
+        coords.add(new Coordinate(0, -1));
+        coords.add(new Coordinate(0, 0));
+        coords.add(new Coordinate(0, 1));
+        coords.add(new Coordinate(0, 2));
+        coords.add(new Coordinate(0, 3));
+
+        coords.add(new Coordinate(1, -2));
+        coords.add(new Coordinate(1, -1));
+        coords.add(new Coordinate(1, 0));
+        coords.add(new Coordinate(1, 1));
+        coords.add(new Coordinate(1, 2));
+
+        coords.add(new Coordinate(-1, -2));
+        coords.add(new Coordinate(-1, -1));
+        coords.add(new Coordinate(-1, 0));
+        coords.add(new Coordinate(-1, 1));
+        coords.add(new Coordinate(-1, 2));
+
+        coords.add(new Coordinate(2, -1));
+        coords.add(new Coordinate(2, 0));
+        coords.add(new Coordinate(2, 1));
+
+        coords.add(new Coordinate(-2, -1));
+        coords.add(new Coordinate(-2, 0));
+        coords.add(new Coordinate(-2, 1));
+
+        coords.add(new Coordinate(3, 0));
+
+        coords.add(new Coordinate(-3, 0));
+
+        assertEquals(coords, b.sonarScanCoordinates(c));
+    }
+
+    @Test
+    public void test_sonarScan() {
+        V2ShipFactory factory = new V2ShipFactory();
+        Board<Character> b1 = new BattleShipBoard<>(10, 10, 'X');
+        Ship<Character> s1 = factory.makeSubmarine(new Placement("A0V"));
+        Ship<Character> s2 = factory.makeCarrier(new Placement("A1D"));
+        b1.tryAddShip(s1);
+        b1.tryAddShip(s2);
+        HashMap<String, Integer> map = b1.sonarScan(new Coordinate("A1"));
+        assertEquals(2, map.get("Submarine"));
+        assertEquals(5, map.get("Carrier"));
     }
 }

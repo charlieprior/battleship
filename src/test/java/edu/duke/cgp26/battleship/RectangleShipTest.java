@@ -20,7 +20,7 @@ class RectangleShipTest {
     private void test_makeCoords_helper(Coordinate c1, int width, int height, HashSet<Coordinate> expected) {
         char placement = get_placement(width, height);
         HashSet<Coordinate> coords = RectangleShip.makeCoords(new Placement(c1, placement), width, height);
-        assertIterableEquals(expected, coords);
+        assertEquals(expected, coords);
     }
 
     private void test_constructor_helper(Coordinate c1, int width, int height, HashSet<Coordinate> expected) {
@@ -111,6 +111,6 @@ class RectangleShipTest {
         coords.add(new Coordinate(1, 2));
         coords.add(new Coordinate(2, 2));
         coords.add(new Coordinate(3, 2));
-        assertIterableEquals(coords, rs.getCoordinates());
+        assertEquals(coords, rs.getCoordinates());
     }
 }

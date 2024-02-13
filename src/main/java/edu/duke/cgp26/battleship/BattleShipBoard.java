@@ -1,6 +1,7 @@
 package edu.duke.cgp26.battleship;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -170,6 +171,49 @@ public class BattleShipBoard<T> implements Board<T> {
         }
         enemyMisses.add(c);
         return null;
+    }
+
+    /**
+     * Generate the Coordinates for a sonar scan at Coordinate c.
+     *
+     * @param c the Coordinate where to sonar scan.
+     * @return the Coordinates of the scan.
+     */
+    protected HashSet<Coordinate> sonarScanCoordinates(Coordinate c) {
+        HashSet<Coordinate> res = new HashSet<>();
+
+        for (int i = 0; i <= 3; i++) {
+            for (int j = -i; j <= i; j++) {
+                res.add(new Coordinate(c.getRow() + 3 - i, c.getColumn() + j));
+                res.add(new Coordinate(c.getRow() + 3 - i, c.getColumn() - j));
+                res.add(new Coordinate(c.getRow() - 3 + i, c.getColumn() + j));
+                res.add(new Coordinate(c.getRow() - 3 + i, c.getColumn() - j));
+            }
+        }
+
+        return res;
+    }
+
+    /**
+     * Perform a sonar scan at a given coordinate.
+     *
+     * @param where the coordinate to check.
+     * @return a map from the representation of ships to the number of said ships.
+     */
+    @Override
+    public HashMap<String, Integer> sonarScan(Coordinate where) {
+        HashMap<String, Integer> res = new HashMap<>();
+        HashSet<Coordinate> coords = sonarScanCoordinates(where);
+        for (Ship<T> s : myShips) {
+            for (Coordinate c : coords) {
+                if (s.occupiesCoordinates(c)) {
+                    Integer val = res.getOrDefault(s.getName(), 0);
+                    val += 1;
+                    res.put(s.getName(), val);
+                }
+            }
+        }
+        return res;
     }
 
     /**
