@@ -46,7 +46,13 @@ public class TextPlayer {
      * A map of ship names to functions that create ships.
      */
     final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
+    /**
+     * The number of sonar scans remaining.
+     */
     int scansRemaining;
+    /**
+     * The number of ship moves remaining.
+     */
     int movesRemaining;
 
     /**

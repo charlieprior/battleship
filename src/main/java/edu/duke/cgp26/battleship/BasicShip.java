@@ -132,4 +132,8 @@ public abstract class BasicShip<T> implements Ship<T> {
     public Iterable<Coordinate> getCoordinates() {
         return myPieces.keySet();
     }
+
+    @Override
+    public void move(Placement where) {
+    }
 }

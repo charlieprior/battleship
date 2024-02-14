@@ -67,4 +67,6 @@ public interface Ship<T> {
      * @return An Iterable with the coordinates that this Ship occupies
      */
     Iterable<Coordinate> getCoordinates();
+
+    void move(Placement where);
 }
