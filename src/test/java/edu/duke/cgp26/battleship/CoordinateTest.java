@@ -5,6 +5,44 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CoordinateTest {
+    private void test_rotate_helper(Coordinate point, Coordinate pivot, Coordinate expected) {
+        assertEquals(expected, point.rotate(pivot));
+    }
+
+    private void test_translate_helper(Coordinate point, int rowOffset, int colOffset, Coordinate expected) {
+        assertEquals(expected, point.translate(rowOffset, colOffset));
+    }
+
+    @Test
+    public void test_translate() {
+        test_translate_helper(new Coordinate(1, 1),
+                1, 1,
+                new Coordinate(2, 2));
+
+        test_translate_helper(new Coordinate(2, 3),
+                1, -1,
+                new Coordinate(3, 2));
+
+        test_translate_helper(new Coordinate(4, 5),
+                -2, 4,
+                new Coordinate(2, 9));
+    }
+
+    @Test
+    public void test_rotate() {
+        test_rotate_helper(new Coordinate(1, 1),
+                new Coordinate(0, 0),
+                new Coordinate(-1, 1));
+
+        test_rotate_helper(new Coordinate(2, 3),
+                new Coordinate(0, 0),
+                new Coordinate(-3, 2));
+
+        test_rotate_helper(new Coordinate(5, 4),
+                new Coordinate(1, 1),
+                new Coordinate(-2, 5));
+    }
+
     @Test
     public void test_row_and_column() {
         Coordinate c1 = new Coordinate(2, 5);

@@ -76,6 +76,57 @@ public class Placement {
     }
 
     /**
+     * Calculate how many times this Placement needs to be rotated to match the new Placement.
+     *
+     * @param where the new Placement.
+     * @return the number of rotation times.
+     */
+    int calculateRotationTimes(Placement where) {
+        int rotationTimes = 0;
+        if (this.getPlacement() != where.getPlacement()) {
+            if (this.getPlacement() == 'H') {
+                rotationTimes = 3;
+            } else if (this.getPlacement() == 'V') {
+                rotationTimes = 1;
+            } else if (this.getPlacement() == 'U') {
+                if (where.getPlacement() == 'L') {
+                    rotationTimes = 1;
+                } else if (where.getPlacement() == 'D') {
+                    rotationTimes = 2;
+                } else if (where.getPlacement() == 'R') {
+                    rotationTimes = 3;
+                }
+            } else if (this.getPlacement() == 'L') {
+                if (where.getPlacement() == 'D') {
+                    rotationTimes = 1;
+                } else if (where.getPlacement() == 'R') {
+                    rotationTimes = 2;
+                } else if (where.getPlacement() == 'U') {
+                    rotationTimes = 3;
+                }
+            } else if (this.getPlacement() == 'D') {
+                if (where.getPlacement() == 'R') {
+                    rotationTimes = 1;
+                } else if (where.getPlacement() == 'U') {
+                    rotationTimes = 2;
+                } else if (where.getPlacement() == 'L') {
+                    rotationTimes = 3;
+                }
+            } else if (this.getPlacement() == 'R') {
+                if (where.getPlacement() == 'U') {
+                    rotationTimes = 1;
+                } else if (where.getPlacement() == 'L') {
+                    rotationTimes = 2;
+                } else if (where.getPlacement() == 'D') {
+                    rotationTimes = 3;
+                }
+            }
+        }
+
+        return rotationTimes;
+    }
+
+    /**
      * Check the equality of two Placements.
      *
      * @param o the other Placement.

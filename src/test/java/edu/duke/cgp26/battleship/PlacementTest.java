@@ -5,6 +5,75 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlacementTest {
+    private void rotationTimesHelper(Placement start, Placement end, int expected) {
+        assertEquals(expected, start.calculateRotationTimes(end));
+    }
+
+    @Test
+    public void test_calculateRotationTimes() {
+        rotationTimesHelper(new Placement("A0V"),
+                new Placement("B6H"),
+                1);
+        rotationTimesHelper(new Placement("A0V"),
+                new Placement("B6V"),
+                0);
+        rotationTimesHelper(new Placement("A0H"),
+                new Placement("B6V"),
+                3);
+        rotationTimesHelper(new Placement("A0H"),
+                new Placement("B6H"),
+                0);
+        rotationTimesHelper(new Placement("A0U"),
+                new Placement("B6U"),
+                0);
+        rotationTimesHelper(new Placement("A0U"),
+                new Placement("B6L"),
+                1);
+        rotationTimesHelper(new Placement("A0U"),
+                new Placement("B6D"),
+                2);
+        rotationTimesHelper(new Placement("A0U"),
+                new Placement("B6R"),
+                3);
+        rotationTimesHelper(new Placement("A0L"),
+                new Placement("B6L"),
+                0);
+        rotationTimesHelper(new Placement("A0L"),
+                new Placement("B6D"),
+                1);
+        rotationTimesHelper(new Placement("A0L"),
+                new Placement("B6R"),
+                2);
+        rotationTimesHelper(new Placement("A0L"),
+                new Placement("B6U"),
+                3);
+        rotationTimesHelper(new Placement("A0D"),
+                new Placement("B6D"),
+                0);
+        rotationTimesHelper(new Placement("A0D"),
+                new Placement("B6R"),
+                1);
+        rotationTimesHelper(new Placement("A0D"),
+                new Placement("B6U"),
+                2);
+        rotationTimesHelper(new Placement("A0D"),
+                new Placement("B6L"),
+                3);
+        rotationTimesHelper(new Placement("A0R"),
+                new Placement("B6R"),
+                0);
+        rotationTimesHelper(new Placement("A0R"),
+                new Placement("B6U"),
+                1);
+        rotationTimesHelper(new Placement("A0R"),
+                new Placement("B6L"),
+                2);
+        rotationTimesHelper(new Placement("A0R"),
+                new Placement("B6D"),
+                3);
+
+    }
+
     @Test
     public void test_basic_constructor() {
         Coordinate c1 = new Coordinate("B3");

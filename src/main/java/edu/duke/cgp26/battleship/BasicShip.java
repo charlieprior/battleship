@@ -1,6 +1,7 @@
 package edu.duke.cgp26.battleship;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A class representing a basic ship.
@@ -128,12 +129,75 @@ public abstract class BasicShip<T> implements Ship<T> {
         }
     }
 
+    /**
+     * Get all the Coordinates that this Ship occupies.
+     *
+     * @return An Iterable with the coordinates that this Ship occupies
+     */
     @Override
     public Iterable<Coordinate> getCoordinates() {
         return myPieces.keySet();
     }
 
+    /**
+     * Get the Placement of this Ship.
+     *
+     * @return the Placement.
+     */
+    @Override
+    public Placement getPlacement() {
+        return myPlacement;
+    }
+
+    /**
+     * Move the ship to a new Placement.
+     *
+     * @param where the new Placement.
+     */
     @Override
     public void move(Placement where) {
+        HashMap<Coordinate, Boolean> newPieces = new HashMap<>();
+
+        int rotationTimes = myPlacement.calculateRotationTimes(where);
+
+        // First rotate the pieces around some pivot point (we choose the upper left)
+        HashMap<Coordinate, Boolean> rotatedPieces = new HashMap<>();
+        for (Map.Entry<Coordinate, Boolean> entry : myPieces.entrySet()) {
+            Coordinate c = entry.getKey();
+            Boolean b = entry.getValue();
+
+            Coordinate rotated = c;
+            for (int i = 0; i < rotationTimes; i++) {
+                rotated = rotated.rotate(where.getWhere());
+            }
+
+            rotatedPieces.put(rotated, b);
+        }
+
+        // Find new upper left of rotated piece, this is what we need to translate from
+        Integer upperrow = null;
+        Integer uppercol = null;
+        for (Coordinate c : rotatedPieces.keySet()) {
+            if (upperrow == null || c.getRow() < upperrow) {
+                upperrow = c.getRow();
+            }
+            if (uppercol == null || c.getColumn() < uppercol) {
+                uppercol = c.getColumn();
+            }
+        }
+
+        // Now translate
+        for (Map.Entry<Coordinate, Boolean> entry : rotatedPieces.entrySet()) {
+            Coordinate c = entry.getKey();
+            Boolean b = entry.getValue();
+
+            Coordinate translated = c.translate(where.getWhere().getRow() - upperrow,
+                    where.getWhere().getColumn() - uppercol);
+
+            newPieces.put(translated, b);
+        }
+
+        myPieces = newPieces;
+        myPlacement = where;
     }
 }

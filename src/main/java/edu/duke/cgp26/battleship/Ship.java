@@ -64,9 +64,21 @@ public interface Ship<T> {
     /**
      * Get all the Coordinates that this Ship occupies.
      *
-     * @return An Iterable with the coordinates that this Ship occupies
+     * @return An Iterable with the coordinates that this Ship occupies.
      */
     Iterable<Coordinate> getCoordinates();
 
+    /**
+     * Get the Placement of this Ship.
+     *
+     * @return the Placement.
+     */
+    Placement getPlacement();
+
+    /**
+     * Move the ship to a new Placement.
+     *
+     * @param where the new Placement.
+     */
     void move(Placement where);
 }

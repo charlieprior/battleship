@@ -71,6 +71,30 @@ public class Coordinate {
     }
 
     /**
+     * Rotate a coordinate counter-clockwise around a pivot point.
+     *
+     * @param pivot The pivot point.
+     * @return The rotated coordinate.
+     */
+    public Coordinate rotate(Coordinate pivot) {
+        int deltaX = this.column - pivot.column;
+        int deltaY = this.row - pivot.row;
+
+        return new Coordinate(pivot.row - deltaX, pivot.column + deltaY);
+    }
+
+    /**
+     * Translate a Coordinate by a given offset.
+     *
+     * @param rowOffset the row offset.
+     * @param colOffset the column offest.
+     * @return the translated Coordinate.
+     */
+    public Coordinate translate(int rowOffset, int colOffset) {
+        return new Coordinate(this.row + rowOffset, this.column + colOffset);
+    }
+
+    /**
      * Compares the equality of two Coordinates.
      *
      * @param o the other Coordinate.
