@@ -7,15 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Added function move to Ship interface and test cases.">
+    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Moving ships working.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BasicShip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BasicShip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Coordinate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Coordinate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Placement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Placement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Ship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/BasicShipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/BasicShipTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/CoordinateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/CoordinateTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/PlacementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/PlacementTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleShipBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleShipBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/TextPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/TextPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/BattleShipBoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/BattleShipBoardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/TextPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/TextPlayerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +127,7 @@
       <recent name="edu.duke.cgp26.battleship" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All Tests">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.duke.cgp26.battleship.App" />
       <module name="battleship.main" />
@@ -203,7 +201,7 @@
       <workItem from="1707849125775" duration="4000" />
       <workItem from="1707849177690" duration="712000" />
       <workItem from="1707849895386" duration="599000" />
-      <workItem from="1707946871185" duration="10633000" />
+      <workItem from="1707946871185" duration="15222000" />
     </task>
     <task id="LOCAL-00001" summary="Task 19">
       <option name="closed" value="true" />
@@ -309,7 +307,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707953157451</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Moving ships working.">
+      <option name="closed" value="true" />
+      <created>1708137383307</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1708137383307</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,7 +347,8 @@
     <MESSAGE value="Changed some V1ShipFactory tests to V2ShipFactory tests in TextPlayerTest" />
     <MESSAGE value="Added sonar scan generation of coordinates and performing the scan." />
     <MESSAGE value="Added function move to Ship interface and test cases." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added function move to Ship interface and test cases." />
+    <MESSAGE value="Moving ships working." />
+    <option name="LAST_COMMIT_MESSAGE" value="Moving ships working." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -349,10 +356,10 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/battleship$AppTest_test_main.ic" NAME="AppTest.test_main Coverage Results" MODIFIED="1707018500711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/battleship$App.ic" NAME="App Coverage Results" MODIFIED="1707339300467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/battleship$App.ic" NAME="App Coverage Results" MODIFIED="1708229091872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1707956913628" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1708229592338" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
   </component>

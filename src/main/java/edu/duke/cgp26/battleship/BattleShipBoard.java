@@ -99,11 +99,16 @@ public class BattleShipBoard<T> implements Board<T> {
      * @return null if the ship can be placed, a description of the error otherwise.
      */
     public String tryAddShip(Ship<T> toAdd) {
-        String result = placementChecker.checkPlacement(toAdd, this);
+        String result = checkShipPlacement(toAdd);
         if (result == null) {
             myShips.add(toAdd);
         }
         return result;
+    }
+
+    @Override
+    public String checkShipPlacement(Ship<T> s) {
+        return placementChecker.checkPlacement(s, this);
     }
 
     /**
@@ -202,6 +207,7 @@ public class BattleShipBoard<T> implements Board<T> {
      */
     @Override
     public HashMap<String, Integer> sonarScan(Coordinate where) {
+        // TODO: Check coordinate in bounds
         HashMap<String, Integer> res = new HashMap<>();
         HashSet<Coordinate> coords = sonarScanCoordinates(where);
         for (Ship<T> s : myShips) {
@@ -214,6 +220,22 @@ public class BattleShipBoard<T> implements Board<T> {
             }
         }
         return res;
+    }
+
+    /**
+     * Find a ship at a given coordinate.
+     *
+     * @param c the coordinate.
+     * @return the ship, if found.
+     */
+    @Override
+    public Ship<T> findShip(Coordinate c) {
+        for (Ship<T> s : myShips) {
+            if (s.occupiesCoordinates(c)) {
+                return s;
+            }
+        }
+        throw new IllegalArgumentException("There is no ship at Coordinate " + c + "\n");
     }
 
     /**

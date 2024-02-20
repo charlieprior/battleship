@@ -64,9 +64,19 @@ public interface Board<T> {
     HashMap<String, Integer> sonarScan(Coordinate c);
 
     /**
+     * Find a ship at a given coordinate.
+     *
+     * @param c the coordinate.
+     * @return the ship, if found.
+     */
+    Ship<T> findShip(Coordinate c);
+
+    /**
      * Check if the game has been lost.
      *
      * @return true if the game has been lost, false otherwise.
      */
     boolean checkIfLost();
+
+    String checkShipPlacement(Ship<T> s);
 }

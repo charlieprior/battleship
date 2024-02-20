@@ -23,6 +23,26 @@ class BattleShipBoardTest {
     }
 
     @Test
+    void test_findShip() {
+        V1ShipFactory factory = new V1ShipFactory();
+        Board<Character> b1 = new BattleShipBoard<>(6, 6, 'X');
+        Ship<Character> s1 = factory.makeSubmarine(new Placement("A0H"));
+        Ship<Character> s2 = factory.makeCarrier(new Placement("A5V"));
+        b1.tryAddShip(s1);
+        b1.tryAddShip(s2);
+        assertSame(s1, b1.findShip(new Coordinate("A0")));
+        assertSame(s1, b1.findShip(new Coordinate("A1")));
+        assertThrows(IllegalArgumentException.class, () -> b1.findShip(new Coordinate("A2")));
+        assertSame(s2, b1.findShip(new Coordinate("A5")));
+        assertSame(s2, b1.findShip(new Coordinate("B5")));
+        assertSame(s2, b1.findShip(new Coordinate("C5")));
+        assertSame(s2, b1.findShip(new Coordinate("D5")));
+        assertSame(s2, b1.findShip(new Coordinate("E5")));
+        assertSame(s2, b1.findShip(new Coordinate("F5")));
+        assertThrows(IllegalArgumentException.class, () -> b1.findShip(new Coordinate("G5")));
+    }
+
+    @Test
     void test_width_and_height() {
         Board<Character> b1 = new BattleShipBoard<>(10, 20, 'X');
         assertEquals(10, b1.getWidth());
