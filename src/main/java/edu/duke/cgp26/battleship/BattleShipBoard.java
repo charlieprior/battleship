@@ -29,14 +29,14 @@ public class BattleShipBoard<T> implements Board<T> {
     private final List<Ship<T>> myShips;
 
     /**
-     * The set of enemy misses.
-     */
-    private final HashSet<Coordinate> enemyMisses;
-
-    /**
      * The rule checker for placing ships.
      */
     private final PlacementRuleChecker<T> placementChecker;
+
+    /**
+     * The view of the board from the enemy perspective.
+     */
+    private final HashMap<Coordinate, T> enemyView;
 
     /**
      * Constructs a BattleShipBoard with the specified width, height and placement checker.
@@ -58,8 +58,8 @@ public class BattleShipBoard<T> implements Board<T> {
         }
         this.width = width;
         this.height = height;
-        this.enemyMisses = new HashSet<>();
         this.missInfo = missInfo;
+        this.enemyView = new HashMap<>();
     }
 
     /**
@@ -99,17 +99,23 @@ public class BattleShipBoard<T> implements Board<T> {
      * @return null if the ship can be placed, a description of the error otherwise.
      */
     public String tryAddShip(Ship<T> toAdd) {
-        String result = checkShipPlacement(toAdd);
+        String result = placementChecker.checkPlacement(toAdd, this);
         if (result == null) {
             myShips.add(toAdd);
         }
         return result;
     }
 
-    @Override
-    public String checkShipPlacement(Ship<T> s) {
-        return placementChecker.checkPlacement(s, this);
+    /**
+     * Try to remove a Ship from the Board.
+     *
+     * @param toRemove the Ship to remove
+     * @return true if removed, false otherwise
+     */
+    public boolean tryRemoveShip(Ship<T> toRemove) {
+        return myShips.remove(toRemove);
     }
+
 
     /**
      * Represent what is at a {@link Coordinate} on the Board from our perspective.
@@ -118,7 +124,13 @@ public class BattleShipBoard<T> implements Board<T> {
      * @return the representation of what is at that Coordinate, or null if unoccupied.
      */
     public T whatIsAtForSelf(Coordinate where) {
-        return whatIsAt(where, true);
+        for (Ship<T> s : myShips) {
+            if (s.occupiesCoordinates(where)) {
+                return s.getDisplayInfoAt(where, true);
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -128,23 +140,7 @@ public class BattleShipBoard<T> implements Board<T> {
      * @return the representation of what is at that Coordinate or null if unoccupied.
      */
     public T whatIsAtForEnemy(Coordinate where) {
-        return whatIsAt(where, false);
-    }
-
-    /**
-     * Represent what is at a {@link Coordinate} on the Board from any perspective.
-     *
-     * @param where  the Coordinate to look at.
-     * @param isSelf true if the perspective is from our side, false if from the enemy side.
-     * @return the representation of what is at that Coordinate, or null if unoccupied.
-     */
-    protected T whatIsAt(Coordinate where, boolean isSelf) {
-        for (Ship<T> s : myShips) {
-            if (s.occupiesCoordinates(where)) {
-                return s.getDisplayInfoAt(where, isSelf);
-            }
-        }
-        return (enemyMisses.contains(where) && !isSelf) ? missInfo : null;
+        return enemyView.get(where);
     }
 
     /**
@@ -171,10 +167,11 @@ public class BattleShipBoard<T> implements Board<T> {
         for (Ship<T> s : myShips) {
             if (s.occupiesCoordinates(c)) {
                 s.recordHitAt(c);
+                enemyView.put(c, s.getDisplayInfoAt(c, false));
                 return s;
             }
         }
-        enemyMisses.add(c);
+        enemyView.put(c, missInfo);
         return null;
     }
 

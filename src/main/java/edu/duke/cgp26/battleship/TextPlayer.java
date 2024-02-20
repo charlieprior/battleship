@@ -237,7 +237,7 @@ public class TextPlayer {
                         "\n" +
                         "Player " + name + ", what would you like to do?\n");
                 if (moveType == 'F') {
-                    fireMove(enemyBoard);
+                    fire(enemyBoard);
                     return;
                 } else if (moveType == 'S') {
                     if (scansRemaining <= 0) {
@@ -251,8 +251,7 @@ public class TextPlayer {
                         print("You have no moves remaining.\n");
                         continue;
                     }
-                    // Move a ship
-                    movesRemaining--; // TODO: implement moveShip and remove this
+                    moveShip();
                     return;
                 }
             } catch (IllegalArgumentException e) {
@@ -294,7 +293,7 @@ public class TextPlayer {
      * @param enemyBoard the enemy's board.
      * @throws IOException We will not handle this exception.
      */
-    public void fireMove(Board<Character> enemyBoard) throws IOException {
+    public void fire(Board<Character> enemyBoard) throws IOException {
         while (true) {
             try {
                 Coordinate c = readCoordinate("Player " + name + " enter the coordinate for your attack:\n");
@@ -313,6 +312,29 @@ public class TextPlayer {
                 print(e.getMessage());
             }
         }
+    }
+
+    /**
+     * Move a ship to a new location.
+     *
+     * @throws IOException we will not handle this exception.
+     */
+    public void moveShip() throws IOException {
+        Coordinate c = readCoordinate("Enter the coordinate of the ship you'd like to move:\n");
+        Ship<Character> s = theBoard.findShip(c);
+        theBoard.tryRemoveShip(s); // Remove the ship so that we can manipulate it without side effects
+
+        Placement oldPlacement = s.getPlacement(); // Save the old placement in case we need to move back
+        Placement p = readPlacement("Where would you like to move your " + s.getName() + "\n");
+        s.move(p);
+        String result = theBoard.tryAddShip(s);
+
+        if (result != null) {
+            s.move(oldPlacement);
+            theBoard.tryAddShip(s);
+            throw new IllegalArgumentException(result);
+        }
+        movesRemaining -= 1;
     }
 
     /**

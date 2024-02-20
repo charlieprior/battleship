@@ -1,6 +1,5 @@
 package edu.duke.cgp26.battleship;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.ResourceAccessMode;
 import org.junit.jupiter.api.parallel.ResourceLock;
@@ -11,7 +10,6 @@ import java.io.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Disabled
     @Test
     @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
     void test_main() throws IOException {

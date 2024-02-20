@@ -32,6 +32,14 @@ public interface Board<T> {
     String tryAddShip(Ship<T> toAdd);
 
     /**
+     * Try to remove a Ship from the Board.
+     *
+     * @param toRemove the Ship to remove
+     * @return true if removed, false otherwise
+     */
+    boolean tryRemoveShip(Ship<T> toRemove);
+
+    /**
      * Represent what is at a {@link Coordinate} on the Board from our perspective.
      *
      * @param where the Coordinate to look at.
@@ -77,6 +85,4 @@ public interface Board<T> {
      * @return true if the game has been lost, false otherwise.
      */
     boolean checkIfLost();
-
-    String checkShipPlacement(Ship<T> s);
 }
