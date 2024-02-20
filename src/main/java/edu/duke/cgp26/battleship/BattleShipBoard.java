@@ -151,6 +151,24 @@ public class BattleShipBoard<T> implements Board<T> {
      */
     @Override
     public Ship<T> fireAt(Coordinate c) {
+        checkInBounds(c);
+        for (Ship<T> s : myShips) {
+            if (s.occupiesCoordinates(c)) {
+                s.recordHitAt(c);
+                enemyView.put(c, s.getDisplayInfoAt(c, false));
+                return s;
+            }
+        }
+        enemyView.put(c, missInfo);
+        return null;
+    }
+
+    /**
+     * Check that a coordinate is in bounds in the board and throw an exception if not.
+     *
+     * @param c The coordinate to check.
+     */
+    protected void checkInBounds(Coordinate c) {
         // Check Coordinate is in bounds
         if (!(0 <= c.getRow())) {
             throw new IllegalArgumentException("That coordinate is invalid: it is off the top of the board.\n");
@@ -164,15 +182,6 @@ public class BattleShipBoard<T> implements Board<T> {
         if (!(c.getColumn() < width)) {
             throw new IllegalArgumentException("That coordinate is invalid: it is off the right of the board.\n");
         }
-        for (Ship<T> s : myShips) {
-            if (s.occupiesCoordinates(c)) {
-                s.recordHitAt(c);
-                enemyView.put(c, s.getDisplayInfoAt(c, false));
-                return s;
-            }
-        }
-        enemyView.put(c, missInfo);
-        return null;
     }
 
     /**
@@ -204,7 +213,7 @@ public class BattleShipBoard<T> implements Board<T> {
      */
     @Override
     public HashMap<String, Integer> sonarScan(Coordinate where) {
-        // TODO: Check coordinate in bounds
+        checkInBounds(where);
         HashMap<String, Integer> res = new HashMap<>();
         HashSet<Coordinate> coords = sonarScanCoordinates(where);
         for (Ship<T> s : myShips) {

@@ -267,24 +267,18 @@ public class TextPlayer {
      * @throws IOException We will not handle this exception.
      */
     public void sonarScan(Board<Character> enemyBoard) throws IOException {
-        while (true) {
-            try {
-                Coordinate c = readCoordinate("Player " + name + " enter the coordinate for your sonar scan:\n");
-                HashMap<String, Integer> scanResults = enemyBoard.sonarScan(c);
-                StringBuilder str = new StringBuilder();
-                HashSet<String> shipTypes = new HashSet<>(shipsToPlace);
-                for (String shipType : shipTypes) {
-                    Integer n = scanResults.getOrDefault(shipType, 0);
-                    str.append(shipType).append("s occupy ").append(n).append(" square");
-                    str.append(n != 1 ? "s\n" : "\n");
-                }
-                scansRemaining -= 1;
-                print(str.toString());
-                return;
-            } catch (IllegalArgumentException e) {
-                print(e.getMessage());
-            }
+        Coordinate c = readCoordinate("Player " + name + " enter the coordinate for your sonar scan:\n");
+        HashMap<String, Integer> scanResults = enemyBoard.sonarScan(c);
+        StringBuilder str = new StringBuilder();
+        HashSet<String> shipTypes = new HashSet<>(shipsToPlace);
+        for (String shipType : shipTypes) {
+            Integer n = scanResults.getOrDefault(shipType, 0);
+            str.append(shipType).append("s occupy ").append(n).append(" square");
+            str.append(n != 1 ? "s\n" : "\n");
         }
+        scansRemaining -= 1;
+        print(str.toString());
+
     }
 
     /**
@@ -294,22 +288,15 @@ public class TextPlayer {
      * @throws IOException We will not handle this exception.
      */
     public void fire(Board<Character> enemyBoard) throws IOException {
-        while (true) {
-            try {
-                Coordinate c = readCoordinate("Player " + name + " enter the coordinate for your attack:\n");
-                Ship<Character> s = enemyBoard.fireAt(c);
-                if (s == null) {
-                    print("You missed!\n");
-                } else {
-                    if (s.isSunk()) {
-                        print("You sunk a " + s.getName() + "!\n");
-                    } else {
-                        print("You hit a " + s.getName() + "!\n");
-                    }
-                }
-                return;
-            } catch (IllegalArgumentException e) {
-                print(e.getMessage());
+        Coordinate c = readCoordinate("Player " + name + " enter the coordinate for your attack:\n");
+        Ship<Character> s = enemyBoard.fireAt(c);
+        if (s == null) {
+            print("You missed!\n");
+        } else {
+            if (s.isSunk()) {
+                print("You sunk a " + s.getName() + "!\n");
+            } else {
+                print("You hit a " + s.getName() + "!\n");
             }
         }
     }

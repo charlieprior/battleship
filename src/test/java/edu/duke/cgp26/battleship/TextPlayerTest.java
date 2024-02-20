@@ -46,12 +46,10 @@ class TextPlayerTest {
         opponent.theBoard.tryAddShip(opponent.shipFactory.makeBattleship(new Placement("D4U")));
         opponent.theBoard.tryAddShip(opponent.shipFactory.makeSubmarine(new Placement("A4V")));
         opponent.theBoard.tryAddShip(opponent.shipFactory.makeCarrier(new Placement("B6D")));
+        assertThrows(IllegalArgumentException.class, () -> player.sonarScan(opponent.theBoard));
         player.sonarScan(opponent.theBoard);
         assertEquals("---------------------------------------------------------------------------\n" +
                 "Player A enter the coordinate for your sonar scan:\n" +
-                "---------------------------------------------------------------------------\n" +
-                "---------------------------------------------------------------------------\n" +
-                "The second character of the coordinate must be a number\n" +
                 "---------------------------------------------------------------------------\n" +
                 "---------------------------------------------------------------------------\n" +
                 "Player A enter the coordinate for your sonar scan:\n" +
@@ -605,6 +603,11 @@ class TextPlayerTest {
         Ship<Character> s1 = factory.makeBattleship(new Placement("A0D"));
         player1.theBoard.tryAddShip(s1);
         player2.fire(player1.theBoard);
+        assertThrows(IllegalArgumentException.class, () -> player2.fire(player1.theBoard));
+        assertThrows(IllegalArgumentException.class, () -> player2.fire(player1.theBoard));
+        assertThrows(IllegalArgumentException.class, () -> player2.fire(player1.theBoard));
+        player2.fire(player1.theBoard);
+        player2.fire(player1.theBoard);
         player2.fire(player1.theBoard);
         player2.fire(player1.theBoard);
         player2.fire(player1.theBoard);
@@ -619,19 +622,10 @@ class TextPlayerTest {
                 "Player A enter the coordinate for your attack:\n" +
                 "---------------------------------------------------------------------------\n" +
                 "---------------------------------------------------------------------------\n" +
-                "That coordinate is invalid: it is off the bottom of the board.\n" +
-                "---------------------------------------------------------------------------\n" +
-                "---------------------------------------------------------------------------\n" +
                 "Player A enter the coordinate for your attack:\n" +
                 "---------------------------------------------------------------------------\n" +
                 "---------------------------------------------------------------------------\n" +
-                "The second character of the coordinate must be a number\n" +
-                "---------------------------------------------------------------------------\n" +
-                "---------------------------------------------------------------------------\n" +
                 "Player A enter the coordinate for your attack:\n" +
-                "---------------------------------------------------------------------------\n" +
-                "---------------------------------------------------------------------------\n" +
-                "The first character of the coordinate must be a letter\n" +
                 "---------------------------------------------------------------------------\n" +
                 "---------------------------------------------------------------------------\n" +
                 "Player A enter the coordinate for your attack:\n" +
@@ -644,6 +638,18 @@ class TextPlayerTest {
                 "---------------------------------------------------------------------------\n" +
                 "---------------------------------------------------------------------------\n" +
                 "You hit a Battleship!\n" +
+                "---------------------------------------------------------------------------\n" +
+                "---------------------------------------------------------------------------\n" +
+                "Player A enter the coordinate for your attack:\n" +
+                "---------------------------------------------------------------------------\n" +
+                "---------------------------------------------------------------------------\n" +
+                "You sunk a Battleship!\n" +
+                "---------------------------------------------------------------------------\n" +
+                "---------------------------------------------------------------------------\n" +
+                "Player A enter the coordinate for your attack:\n" +
+                "---------------------------------------------------------------------------\n" +
+                "---------------------------------------------------------------------------\n" +
+                "You missed!\n" +
                 "---------------------------------------------------------------------------\n" +
                 "---------------------------------------------------------------------------\n" +
                 "Player A enter the coordinate for your attack:\n" +
