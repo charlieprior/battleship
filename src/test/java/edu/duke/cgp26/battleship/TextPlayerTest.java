@@ -8,22 +8,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TextPlayerTest {
-    private TextPlayer createTextPlayer(int w, int h, String inputData, OutputStream bytes) {
+    private Player createTextPlayer(int w, int h, String inputData, OutputStream bytes) {
         BufferedReader input = new BufferedReader(new StringReader(inputData));
         PrintStream output = new PrintStream(bytes, true);
         Board<Character> board = new BattleShipBoard<>(w, h, 'X');
         V2ShipFactory shipFactory = new V2ShipFactory();
-        return new TextPlayer("A", board, input, output, shipFactory);
+        return new TextPlayer("A", board, shipFactory, input, output);
     }
 
     @Test
     void test_moveShip() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(10, 20, "D5\nA0R\nA0\nE0D", bytes);
+        Player player = createTextPlayer(10, 20, "D5\nA0R\nA0\nE0D", bytes);
         player.theBoard.tryAddShip(player.shipFactory.makeBattleship(new Placement("D4U")));
         player.theBoard.tryAddShip(player.shipFactory.makeSubmarine(new Placement("E0V")));
         player.moveShip();
-        assertThrows(IllegalArgumentException.class, player::moveShip);
+        assertThrows(IllegalArgumentException.class, () -> player.moveShip());
         assertEquals("---------------------------------------------------------------------------\n" +
                 "Enter the coordinate of the ship you'd like to move:\n" +
                 "---------------------------------------------------------------------------\n" +
@@ -41,8 +41,8 @@ class TextPlayerTest {
     @Test
     void test_sonarScan() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(10, 20, "A&\nD5", bytes);
-        TextPlayer opponent = createTextPlayer(10, 20, "", bytes);
+        Player player = createTextPlayer(10, 20, "A&\nD5", bytes);
+        Player opponent = createTextPlayer(10, 20, "", bytes);
         opponent.theBoard.tryAddShip(opponent.shipFactory.makeBattleship(new Placement("D4U")));
         opponent.theBoard.tryAddShip(opponent.shipFactory.makeSubmarine(new Placement("A4V")));
         opponent.theBoard.tryAddShip(opponent.shipFactory.makeCarrier(new Placement("B6D")));
@@ -65,7 +65,7 @@ class TextPlayerTest {
     @Test
     void test_invalid_orientation() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(10, 20, "A0Q\nA0V", bytes);
+        Player player = createTextPlayer(10, 20, "A0Q\nA0V", bytes);
         AbstractShipFactory<Character> factory = new V1ShipFactory();
 
         player.doOnePlacement("Destroyer", factory::makeDestroyer);
@@ -108,7 +108,7 @@ class TextPlayerTest {
     @Test
     void test_invalid_placement_string() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(10, 20, "AAV\nA0V", bytes);
+        Player player = createTextPlayer(10, 20, "AAV\nA0V", bytes);
         AbstractShipFactory<Character> factory = new V1ShipFactory();
 
         player.doOnePlacement("Destroyer", factory::makeDestroyer);
@@ -151,7 +151,7 @@ class TextPlayerTest {
     @Test
     void test_invalid_ship_placement() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(10, 20, "A9H\nA0V", bytes);
+        Player player = createTextPlayer(10, 20, "A9H\nA0V", bytes);
         AbstractShipFactory<Character> factory = new V1ShipFactory();
 
         player.doOnePlacement("Destroyer", factory::makeDestroyer);
@@ -194,15 +194,15 @@ class TextPlayerTest {
     @Test
     void test_empty_file() {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(10, 20, "", bytes);
-        assertThrows(EOFException.class, () -> player.readPlacement(""));
-        assertThrows(EOFException.class, () -> player.readCoordinate(""));
+        Player player = createTextPlayer(10, 20, "", bytes);
+        assertThrows(EOFException.class, () -> player.getPlacement(""));
+        assertThrows(EOFException.class, () -> player.getCoordinate(""));
     }
 
     @Test
     void test_read_placement() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(10, 20, "B2V\nC8H\na4v\n", bytes);
+        Player player = createTextPlayer(10, 20, "B2V\nC8H\na4v\n", bytes);
 
         String prompt = "Please enter a location for a ship:\n";
         Placement[] expected = new Placement[3];
@@ -211,7 +211,7 @@ class TextPlayerTest {
         expected[2] = new Placement(new Coordinate(0, 4), 'V');
 
         for (Placement placement : expected) {
-            Placement p = player.readPlacement(prompt);
+            Placement p = player.getPlacement(prompt);
             assertEquals(p, placement); //did we get the right Placement back
             assertEquals("---------------------------------------------------------------------------\n" +
                             prompt +
@@ -224,7 +224,7 @@ class TextPlayerTest {
     @Test
     void test_do_one_placement() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(3, 5, "B2V", bytes);
+        Player player = createTextPlayer(3, 5, "B2V", bytes);
         AbstractShipFactory<Character> factory = new V1ShipFactory();
 
         player.doOnePlacement("Destroyer", factory::makeDestroyer);
@@ -246,7 +246,7 @@ class TextPlayerTest {
     @Test
     void test_do_one_placement2() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(5, 5, "A1D", bytes);
+        Player player = createTextPlayer(5, 5, "A1D", bytes);
         AbstractShipFactory<Character> factory = new V2ShipFactory();
 
         player.doOnePlacement("Battleship", factory::makeBattleship);
@@ -268,7 +268,7 @@ class TextPlayerTest {
     @Test
     public void test_doPlacementPhase() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(10, 20, "A0H\n" +
+        Player player = createTextPlayer(10, 20, "A0H\n" +
                 "C0V\n" +
                 "B3V\n" +
                 "O5V\n" +
@@ -597,8 +597,8 @@ class TextPlayerTest {
     @Test
     public void test_fireMove() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player1 = createTextPlayer(10, 20, "", bytes);
-        TextPlayer player2 = createTextPlayer(10, 20, "A0\nZ9\nAA\n6]\nA1\nA2\nB1\nD0\nA0\nA4", bytes);
+        Player player1 = createTextPlayer(10, 20, "", bytes);
+        Player player2 = createTextPlayer(10, 20, "A0\nZ9\nAA\n6]\nA1\nA2\nB1\nD0\nA0\nA4", bytes);
         AbstractShipFactory<Character> factory = new V2ShipFactory();
         Ship<Character> s1 = factory.makeBattleship(new Placement("A0D"));
         player1.theBoard.tryAddShip(s1);
@@ -669,7 +669,7 @@ class TextPlayerTest {
     @Test
     void test_printWin() {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(10, 20, "", bytes);
+        Player player = createTextPlayer(10, 20, "", bytes);
         player.printWin();
         assertEquals("---------------------------------------------------------------------------\n" +
                 "Player A has won!\n" +
@@ -680,24 +680,24 @@ class TextPlayerTest {
     @Test
     void test_readMoveType() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player1 = createTextPlayer(10, 20, "F", bytes);
-        assertEquals('F', player1.readMoveType(""));
-        TextPlayer player2 = createTextPlayer(10, 20, "s", bytes);
-        assertEquals('S', player2.readMoveType(""));
-        TextPlayer player3 = createTextPlayer(10, 20, "m", bytes);
-        assertEquals('M', player3.readMoveType(""));
-        TextPlayer player4 = createTextPlayer(10, 20, "g", bytes);
-        assertThrows(IllegalArgumentException.class, () -> player4.readMoveType(""));
-        TextPlayer player5 = createTextPlayer(10, 20, "", bytes);
-        assertThrows(EOFException.class, () -> player5.readMoveType(""));
+        Player player1 = createTextPlayer(10, 20, "F", bytes);
+        assertEquals('F', player1.getMoveType(""));
+        Player player2 = createTextPlayer(10, 20, "s", bytes);
+        assertEquals('S', player2.getMoveType(""));
+        Player player3 = createTextPlayer(10, 20, "m", bytes);
+        assertEquals('M', player3.getMoveType(""));
+        Player player4 = createTextPlayer(10, 20, "g", bytes);
+        assertThrows(IllegalArgumentException.class, () -> player4.getMoveType(""));
+        Player player5 = createTextPlayer(10, 20, "", bytes);
+        assertThrows(EOFException.class, () -> player5.getMoveType(""));
     }
 
     @Test
     void test_playOneTurn() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer(10, 20, "F\nA4\nS\nD5\nS\nB3\nS\nF4\nS\nM\nD5\nD4R\nM\nA4\nA8H\n" +
+        Player player = createTextPlayer(10, 20, "F\nA4\nS\nD5\nS\nB3\nS\nF4\nS\nM\nD5\nD4R\nM\nA4\nA8H\n" +
                 "M\nB6\nB7D\nM\nH\nF\nA0", bytes);
-        TextPlayer opponent = createTextPlayer(10, 20, "", bytes);
+        Player opponent = createTextPlayer(10, 20, "", bytes);
         opponent.theBoard.tryAddShip(opponent.shipFactory.makeBattleship(new Placement("D4U")));
         player.theBoard.tryAddShip(player.shipFactory.makeBattleship(new Placement("D4U")));
         opponent.theBoard.tryAddShip(opponent.shipFactory.makeSubmarine(new Placement("A4V")));

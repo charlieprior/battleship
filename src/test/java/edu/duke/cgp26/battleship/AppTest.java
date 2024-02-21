@@ -44,8 +44,8 @@ class AppTest {
         Board<Character> board2 = new BattleShipBoard<>(6, 6, 'X');
 
         AbstractShipFactory<Character> factory = new V1ShipFactory();
-        TextPlayer player1 = new TextPlayer("A", board1, input, output, factory);
-        TextPlayer player2 = new TextPlayer("B", board2, input, output, factory);
+        Player player1 = new TextPlayer("A", board1, factory, input, output);
+        Player player2 = new TextPlayer("B", board2, factory, input, output);
 
         App app = new App(player1, player2);
 

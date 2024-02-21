@@ -36,7 +36,7 @@ public class BattleShipBoard<T> implements Board<T> {
     /**
      * The view of the board from the enemy perspective.
      */
-    private final HashMap<Coordinate, T> enemyView;
+    private final HashMap<Coordinate, T> enemyDisplayMap;
 
     /**
      * Constructs a BattleShipBoard with the specified width, height and placement checker.
@@ -59,7 +59,7 @@ public class BattleShipBoard<T> implements Board<T> {
         this.width = width;
         this.height = height;
         this.missInfo = missInfo;
-        this.enemyView = new HashMap<>();
+        this.enemyDisplayMap = new HashMap<>();
     }
 
     /**
@@ -140,7 +140,7 @@ public class BattleShipBoard<T> implements Board<T> {
      * @return the representation of what is at that Coordinate or null if unoccupied.
      */
     public T whatIsAtForEnemy(Coordinate where) {
-        return enemyView.get(where);
+        return enemyDisplayMap.get(where);
     }
 
     /**
@@ -155,11 +155,11 @@ public class BattleShipBoard<T> implements Board<T> {
         for (Ship<T> s : myShips) {
             if (s.occupiesCoordinates(c)) {
                 s.recordHitAt(c);
-                enemyView.put(c, s.getDisplayInfoAt(c, false));
+                enemyDisplayMap.put(c, s.getDisplayInfoAt(c, false));
                 return s;
             }
         }
-        enemyView.put(c, missInfo);
+        enemyDisplayMap.put(c, missInfo);
         return null;
     }
 

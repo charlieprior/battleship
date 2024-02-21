@@ -11,11 +11,11 @@ public class App {
     /**
      * The first player.
      */
-    final TextPlayer player1;
+    final Player player1;
     /**
      * The second player.
      */
-    final TextPlayer player2;
+    final Player player2;
 
     /**
      * Create an App with two players.
@@ -23,7 +23,7 @@ public class App {
      * @param player1 The first player.
      * @param player2 The second player.
      */
-    public App(TextPlayer player1, TextPlayer player2) {
+    public App(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
     }
@@ -36,12 +36,13 @@ public class App {
      */
     public static void main(String[] args) throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        PlayerFactory playerFactory = new PlayerFactory();
         Board<Character> b1 = new BattleShipBoard<>(10, 20, 'X');
         Board<Character> b2 = new BattleShipBoard<>(10, 20, 'X');
-        V1ShipFactory factory = new V2ShipFactory();
+        AbstractShipFactory<Character> shipFactory = new V2ShipFactory();
 
-        TextPlayer player1 = new TextPlayer("A", b1, input, System.out, factory);
-        TextPlayer player2 = new TextPlayer("B", b2, input, System.out, factory);
+        Player player1 = playerFactory.makePlayer("A", b1, shipFactory, input, System.out);
+        Player player2 = playerFactory.makePlayer("B", b2, shipFactory, input, System.out);
 
         App app = new App(player1, player2);
         app.doPlacementPhase();
@@ -66,7 +67,7 @@ public class App {
      * @return true if the game is over, false otherwise.
      * @throws IOException We will not handle this exception.
      */
-    public boolean doOneAttack(TextPlayer attacker, TextPlayer defender) throws IOException {
+    public boolean doOneAttack(Player attacker, Player defender) throws IOException {
         attacker.playOneTurn(defender.theBoard, defender.view, defender.name);
         if (defender.theBoard.checkIfLost()) {
             attacker.printWin();
