@@ -7,21 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Added test that coordinates for sonar scan are in bounds and changed to reselect move if invalid coordinate is selected for fire or sonar scan.">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/AITextPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/PlayerFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/AITextPlayerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/PlayerFactoryTest.java" afterDir="false" />
+    <list default="true" id="e6ea3607-8707-46ce-9f9a-a0e3efb9fb7f" name="Changes" comment="Minor change.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleShipBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/BattleShipBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/TextPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/TextPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/AppTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/TextPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/duke/cgp26/battleship/TextPlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/input.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/output.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,16 +80,21 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Application.App.executor&quot;: &quot;Coverage&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
     &quot;Gradle.AppTest.test_main.executor&quot;: &quot;Coverage&quot;,
     &quot;Gradle.Build battleship.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.InBoundsRuleCheckerTest.test_rule.executor&quot;: &quot;Debug&quot;,
     &quot;Gradle.MainTest.test_main.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.TextPlayerTest.test_readMoveType.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.battleship [:App.main()].executor&quot;: &quot;Debug&quot;,
+    &quot;Gradle.battleship [:App.main()].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.battleship [installDist].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.battleship [jar].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.battleship [tasks].executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All Tests.executor&quot;: &quot;Coverage&quot;,
+    &quot;Gradle.battleship.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All Tests.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -212,7 +204,20 @@
       <workItem from="1707849895386" duration="599000" />
       <workItem from="1707946871185" duration="15983000" />
       <workItem from="1708536690131" duration="44000" />
-      <workItem from="1708536754377" duration="1156000" />
+      <workItem from="1708536754377" duration="3901000" />
+      <workItem from="1708562806987" duration="977000" />
+      <workItem from="1708622427857" duration="53000" />
+      <workItem from="1710084756063" duration="323000" />
+      <workItem from="1711230421248" duration="52000" />
+      <workItem from="1711230515805" duration="525000" />
+      <workItem from="1711387378087" duration="4211000" />
+      <workItem from="1711827068573" duration="143000" />
+      <workItem from="1712595411333" duration="11000" />
+      <workItem from="1712595814272" duration="871000" />
+      <workItem from="1712762582601" duration="383000" />
+      <workItem from="1712764926774" duration="808000" />
+      <workItem from="1712778658712" duration="645000" />
+      <workItem from="1712846291761" duration="527000" />
     </task>
     <task id="LOCAL-00001" summary="Task 19">
       <option name="closed" value="true" />
@@ -350,7 +355,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708458032557</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Added AI player.">
+      <option name="closed" value="true" />
+      <created>1708538014709</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1708538014709</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -386,22 +399,8 @@
     <MESSAGE value="Added findShip and checkShipPlacement" />
     <MESSAGE value="Added moveShip to TextPlayer" />
     <MESSAGE value="Added test that coordinates for sonar scan are in bounds and changed to reselect move if invalid coordinate is selected for fire or sonar scan." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added test that coordinates for sonar scan are in bounds and changed to reselect move if invalid coordinate is selected for fire or sonar scan." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/edu/duke/cgp26/battleship/Player.java</url>
-          <line>183</line>
-          <properties class="edu.duke.cgp26.battleship.Player" method="playOneTurn">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Added AI player." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added AI player." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -412,7 +411,7 @@
     <SUITE FILE_PATH="coverage/battleship$App.ic" NAME="App Coverage Results" MODIFIED="1708229091872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1708537382446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/battleship$All_Tests.ic" NAME="All Tests Coverage Results" MODIFIED="1708552929645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>edu.duke.cgp26.battleship.*</FILTER>
     </SUITE>
   </component>
